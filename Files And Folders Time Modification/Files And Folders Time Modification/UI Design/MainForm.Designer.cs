@@ -28,12 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -43,12 +50,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -122,6 +123,57 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "相关设置";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(6, 212);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 14);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "访问时间：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(6, 184);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 14);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "修改时间：";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(6, 156);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 14);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "创建时间：";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(84, 210);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(229, 21);
+            this.textBox5.TabIndex = 5;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(84, 182);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(229, 21);
+            this.textBox4.TabIndex = 4;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(84, 154);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(229, 21);
+            this.textBox3.TabIndex = 3;
             // 
             // textBox2
             // 
@@ -212,57 +264,6 @@
             this.button4.Text = "重置程序";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(84, 154);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(229, 21);
-            this.textBox3.TabIndex = 3;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(84, 182);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(229, 21);
-            this.textBox4.TabIndex = 4;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(84, 210);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(229, 21);
-            this.textBox5.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(6, 156);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 14);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "创建时间：";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 184);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 14);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "修改时间：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(6, 212);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 14);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "访问时间：";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -277,6 +278,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "文件与文件夹时间修改";
             this.groupBox1.ResumeLayout(false);

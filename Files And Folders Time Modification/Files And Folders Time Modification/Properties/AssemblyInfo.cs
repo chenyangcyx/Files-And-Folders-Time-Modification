@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("Files And Folders Time Modification")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A Program To Modificate Files And Folders' Time")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Files And Folders Time Modification")]
