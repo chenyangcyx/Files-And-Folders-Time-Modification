@@ -27,8 +27,13 @@ namespace Test_Project1
             {
                 System.Console.WriteLine(di.Name);
                 System.Console.WriteLine(di.FullName);
-                System.Console.WriteLine(di.Parent);
+                System.Console.WriteLine(di.Parent.FullName);
             }
+        }
+
+        public string GetParentPath(string path,string parent_path_name)
+        {
+            return path.Substring(0, path.LastIndexOf(parent_path_name) + parent_path_name.Length);
         }
     }
 }
