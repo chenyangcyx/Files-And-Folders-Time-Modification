@@ -10,6 +10,8 @@ namespace Test_Project1
     {
         static void Main(string[] args)
         {
+            GetFileInfo gfi = new GetFileInfo();
+            gfi.GetInfo("D:\\Code\\Files-And-Folders-Time-Modification");
         }
     }
 }
