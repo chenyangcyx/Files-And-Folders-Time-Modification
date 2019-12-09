@@ -14,7 +14,7 @@ namespace Files_And_Folders_Time_Modification
 {
     public partial class MainForm : Form
     {
-        OverAllData all = new OverAllData();
+        OverAllData all = OverAllData.alldata;
         UIRefresh uir = new UIRefresh();
 
         public MainForm()
@@ -37,6 +37,8 @@ namespace Files_And_Folders_Time_Modification
             textBox_setting_creating_time.Enabled = false;
             textBox_setting_modifying_time.Enabled = false;
             textBox_setting_accessing_time.Enabled = false;
+            //统计信息
+            uir.RefreshCountInfo(listView_countinfo, false);
         }
 
         //按钮“添加文件夹”操作

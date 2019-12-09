@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button_addfolder = new System.Windows.Forms.Button();
             this.groupBox_folder_list = new System.Windows.Forms.GroupBox();
+            this.listView_folder = new System.Windows.Forms.ListView();
             this.groupBox_countinfo = new System.Windows.Forms.GroupBox();
+            this.listView_countinfo = new System.Windows.Forms.ListView();
             this.groupBox_settingbox = new System.Windows.Forms.GroupBox();
             this.label_setting_accessing_time_label = new System.Windows.Forms.Label();
             this.label_setting_modifying_time_label = new System.Windows.Forms.Label();
@@ -48,8 +50,6 @@
             this.button_program_start = new System.Windows.Forms.Button();
             this.button_clear_folder_list = new System.Windows.Forms.Button();
             this.button_reset_program = new System.Windows.Forms.Button();
-            this.listView_folder = new System.Windows.Forms.ListView();
-            this.listView_countinfo = new System.Windows.Forms.ListView();
             this.groupBox_folder_list.SuspendLayout();
             this.groupBox_countinfo.SuspendLayout();
             this.groupBox_settingbox.SuspendLayout();
@@ -77,15 +77,38 @@
             this.groupBox_folder_list.TabStop = false;
             this.groupBox_folder_list.Text = "文件夹列表";
             // 
+            // listView_folder
+            // 
+            this.listView_folder.AllowDrop = true;
+            this.listView_folder.HideSelection = false;
+            this.listView_folder.Location = new System.Drawing.Point(6, 20);
+            this.listView_folder.Name = "listView_folder";
+            this.listView_folder.Size = new System.Drawing.Size(375, 213);
+            this.listView_folder.TabIndex = 0;
+            this.listView_folder.UseCompatibleStateImageBehavior = false;
+            this.listView_folder.View = System.Windows.Forms.View.Details;
+            this.listView_folder.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView_folder_DragDrop);
+            this.listView_folder.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView_folder_DragEnter);
+            // 
             // groupBox_countinfo
             // 
             this.groupBox_countinfo.Controls.Add(this.listView_countinfo);
             this.groupBox_countinfo.Location = new System.Drawing.Point(12, 289);
             this.groupBox_countinfo.Name = "groupBox_countinfo";
-            this.groupBox_countinfo.Size = new System.Drawing.Size(341, 150);
+            this.groupBox_countinfo.Size = new System.Drawing.Size(252, 150);
             this.groupBox_countinfo.TabIndex = 2;
             this.groupBox_countinfo.TabStop = false;
             this.groupBox_countinfo.Text = "统计信息";
+            // 
+            // listView_countinfo
+            // 
+            this.listView_countinfo.HideSelection = false;
+            this.listView_countinfo.Location = new System.Drawing.Point(7, 21);
+            this.listView_countinfo.Name = "listView_countinfo";
+            this.listView_countinfo.Size = new System.Drawing.Size(239, 123);
+            this.listView_countinfo.TabIndex = 0;
+            this.listView_countinfo.UseCompatibleStateImageBehavior = false;
+            this.listView_countinfo.View = System.Windows.Forms.View.Details;
             // 
             // groupBox_settingbox
             // 
@@ -196,19 +219,19 @@
             // groupBox_logoutput
             // 
             this.groupBox_logoutput.Controls.Add(this.textBox_logoutput);
-            this.groupBox_logoutput.Location = new System.Drawing.Point(360, 289);
+            this.groupBox_logoutput.Location = new System.Drawing.Point(295, 289);
             this.groupBox_logoutput.Name = "groupBox_logoutput";
-            this.groupBox_logoutput.Size = new System.Drawing.Size(364, 150);
+            this.groupBox_logoutput.Size = new System.Drawing.Size(429, 150);
             this.groupBox_logoutput.TabIndex = 4;
             this.groupBox_logoutput.TabStop = false;
             this.groupBox_logoutput.Text = "日志输出";
             // 
             // textBox_logoutput
             // 
-            this.textBox_logoutput.Location = new System.Drawing.Point(7, 21);
+            this.textBox_logoutput.Location = new System.Drawing.Point(68, 21);
             this.textBox_logoutput.Multiline = true;
             this.textBox_logoutput.Name = "textBox_logoutput";
-            this.textBox_logoutput.Size = new System.Drawing.Size(351, 123);
+            this.textBox_logoutput.Size = new System.Drawing.Size(395, 123);
             this.textBox_logoutput.TabIndex = 0;
             // 
             // progressBar
@@ -248,29 +271,6 @@
             this.button_reset_program.Text = "重置程序";
             this.button_reset_program.UseVisualStyleBackColor = true;
             this.button_reset_program.Click += new System.EventHandler(this.button_reset_program_Click);
-            // 
-            // listView_folder
-            // 
-            this.listView_folder.AllowDrop = true;
-            this.listView_folder.HideSelection = false;
-            this.listView_folder.Location = new System.Drawing.Point(6, 20);
-            this.listView_folder.Name = "listView_folder";
-            this.listView_folder.Size = new System.Drawing.Size(375, 213);
-            this.listView_folder.TabIndex = 0;
-            this.listView_folder.UseCompatibleStateImageBehavior = false;
-            this.listView_folder.View = System.Windows.Forms.View.Details;
-            this.listView_folder.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView_folder_DragDrop);
-            this.listView_folder.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView_folder_DragEnter);
-            // 
-            // listView_countinfo
-            // 
-            this.listView_countinfo.HideSelection = false;
-            this.listView_countinfo.Location = new System.Drawing.Point(7, 21);
-            this.listView_countinfo.Name = "listView_countinfo";
-            this.listView_countinfo.Size = new System.Drawing.Size(328, 123);
-            this.listView_countinfo.TabIndex = 0;
-            this.listView_countinfo.UseCompatibleStateImageBehavior = false;
-            this.listView_countinfo.View = System.Windows.Forms.View.Details;
             // 
             // MainForm
             // 

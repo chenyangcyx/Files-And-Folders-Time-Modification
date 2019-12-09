@@ -19,11 +19,11 @@ namespace Files_And_Folders_Time_Modification.Code
         public const int LISTVIEW_FILELIST_PATH_WIDTH = 400;
         //UI设置-统计信息列表
         public const string LISTVIEW_COUNTINFO_COLOUMN1_STRING = "项目";
-        public const int LISTVIEW_COUNTINFO_COLOUMN1_WIDTH = 50;
+        public const int LISTVIEW_COUNTINFO_COLOUMN1_WIDTH = 120;
         public const string LISTVIEW_COUNTINFO_COLOUMN2_STRING = "数据";
-        public const int LISTVIEW_COUNTINFO_COLOUMN2_WIDTH = 100;
+        public const int LISTVIEW_COUNTINFO_COLOUMN2_WIDTH = 55;
         public const string LISTVIEW_COUNTINFO_COLOUMN3_STRING = "进度";
-        public const int LISTVIEW_COUNTINFO_COLOUMN3_WIDTH = 200;
+        public const int LISTVIEW_COUNTINFO_COLOUMN3_WIDTH = 40;
         public const string LISTVIEW_COUNTINFO_INFO1_STRING = "文件及文件夹 数量";
         public const string LISTVIEW_COUNTINFO_INFO1_FILENUM_STRING = "文件";
         public const string LISTVIEW_COUNTINFO_INFO1_FOLDERNUM_STRING = "文件夹";
@@ -47,12 +47,12 @@ namespace Files_And_Folders_Time_Modification.Code
         public string setting_modificatetime = SETTING_MODIFICATETIME_INIT;
         public string setting_visittime = SETTING_VISISTIME_INTI;
         //统计信息
-        public const int COUNT_ALL_FILE_COUNT_INTI=-1;
-        public const int COUNT_ALL_FOLDER_COUNT_INTI = -1;
-        public const int COUNT_ALL_FILEFOLDER_COUNT_INIT = -1;
-        public const int COUNT_SETTED_FILE_COUNT_INIT = -1;
-        public const int COUNT_SETTED_FOLDER_COUNT_INIT = -1;
-        public const int COUNT_SETTED_FILEFOLDER_COUNT_INIT = -1;
+        public const int COUNT_ALL_FILE_COUNT_INTI = 0;
+        public const int COUNT_ALL_FOLDER_COUNT_INTI = 0;
+        public const int COUNT_ALL_FILEFOLDER_COUNT_INIT = 0;
+        public const int COUNT_SETTED_FILE_COUNT_INIT = 0;
+        public const int COUNT_SETTED_FOLDER_COUNT_INIT = 0;
+        public const int COUNT_SETTED_FILEFOLDER_COUNT_INIT = 0;
         public int count_all_file_count = COUNT_ALL_FILE_COUNT_INTI;
         public int count_all_folder_count = COUNT_ALL_FOLDER_COUNT_INTI;
         public int count_all_filefolder_count = COUNT_ALL_FILEFOLDER_COUNT_INIT;
