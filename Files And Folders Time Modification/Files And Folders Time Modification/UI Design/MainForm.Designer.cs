@@ -178,6 +178,7 @@
             this.radioButton_specific_setting.TabIndex = 1;
             this.radioButton_specific_setting.Text = "统一设置";
             this.radioButton_specific_setting.UseVisualStyleBackColor = true;
+            this.radioButton_specific_setting.CheckedChanged += new System.EventHandler(this.radioButton_specific_setting_CheckedChanged);
             // 
             // radioButton_default_setting
             // 
@@ -190,6 +191,7 @@
             this.radioButton_default_setting.TabStop = true;
             this.radioButton_default_setting.Text = "默认设置";
             this.radioButton_default_setting.UseVisualStyleBackColor = true;
+            this.radioButton_default_setting.CheckedChanged += new System.EventHandler(this.radioButton_default_setting_CheckedChanged);
             // 
             // groupBox_logoutput
             // 
@@ -284,7 +286,9 @@
             this.Controls.Add(this.groupBox_countinfo);
             this.Controls.Add(this.groupBox_folder_list);
             this.Controls.Add(this.button_addfolder);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "文件与文件夹时间修改";
             this.groupBox_folder_list.ResumeLayout(false);

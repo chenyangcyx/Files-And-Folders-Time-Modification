@@ -35,5 +35,13 @@ namespace Files_And_Folders_Time_Modification.Code
             }
             lv.EndUpdate();
         }
+
+        //添加listview_countinfo的标题
+        public void AddCountInfoListTitle(ListView lv)
+        {
+            lv.Columns.Add(OverAllData.LISTVIEW_COUNTINFO_COLOUMN1_STRING, OverAllData.LISTVIEW_COUNTINFO_COLOUMN1_WIDTH, HorizontalAlignment.Left);
+            lv.Columns.Add(OverAllData.LISTVIEW_COUNTINFO_COLOUMN2_STRING, OverAllData.LISTVIEW_COUNTINFO_COLOUMN2_WIDTH, HorizontalAlignment.Left);
+            lv.Columns.Add(OverAllData.LISTVIEW_COUNTINFO_COLOUMN3_STRING, OverAllData.LISTVIEW_COUNTINFO_COLOUMN3_WIDTH, HorizontalAlignment.Left);
+        }
     }
 }

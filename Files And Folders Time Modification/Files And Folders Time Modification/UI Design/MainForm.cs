@@ -30,7 +30,13 @@ namespace Files_And_Folders_Time_Modification
             all.file_list.Clear();
             //更新listview列表视图
             uir.RefreshFileListView(listView_folder, all.file_list);
-
+            //设置选项
+            all.setting_choice = OverAllData.SETTING_DEFAULT;
+            radioButton_default_setting.Checked = true;
+            radioButton_specific_setting.Checked = false;
+            textBox_setting_creating_time.Enabled = false;
+            textBox_setting_modifying_time.Enabled = false;
+            textBox_setting_accessing_time.Enabled = false;
         }
 
         //按钮“添加文件夹”操作
@@ -61,6 +67,12 @@ namespace Files_And_Folders_Time_Modification
             uir.RefreshFileListView(listView_folder, all.file_list);
         }
 
+        //按钮“重置程序”操作
+        private void button_reset_program_Click(object sender, EventArgs e)
+        {
+            InitAll();
+        }
+
         //ListView_folder拖入时的检查
         private void listView_folder_DragEnter(object sender, DragEventArgs e)
         {
@@ -86,10 +98,30 @@ namespace Files_And_Folders_Time_Modification
             uir.RefreshFileListView(listView_folder, all.file_list);
         }
 
-        //按钮“重置程序”操作
-        private void button_reset_program_Click(object sender, EventArgs e)
+        //相关设置-默认设置
+        private void radioButton_default_setting_CheckedChanged(object sender, EventArgs e)
         {
-            InitAll();
+            if (radioButton_default_setting.Checked)
+            {
+                radioButton_specific_setting.Checked = false;
+                textBox_setting_creating_time.Enabled = false;
+                textBox_setting_modifying_time.Enabled = false;
+                textBox_setting_accessing_time.Enabled = false;
+                all.setting_choice = OverAllData.SETTING_DEFAULT;
+            }
+        }
+
+        //相关设置-统一设置
+        private void radioButton_specific_setting_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton_specific_setting.Checked)
+            {
+                radioButton_default_setting.Checked = false;
+                textBox_setting_creating_time.Enabled = true;
+                textBox_setting_modifying_time.Enabled = true;
+                textBox_setting_accessing_time.Enabled = true;
+                all.setting_choice = OverAllData.SETTING_SPECIFIC;
+            }
         }
     }
 }
