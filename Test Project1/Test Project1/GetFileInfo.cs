@@ -35,5 +35,16 @@ namespace Test_Project1
         {
             return path.Substring(0, path.LastIndexOf(parent_path_name) + parent_path_name.Length);
         }
+
+        public void TestGetFileTime(string path)
+        {
+            FileInfo fi = new FileInfo(path);
+            System.Console.WriteLine(fi.CreationTime);
+            System.Console.WriteLine(fi.CreationTimeUtc);
+            System.Console.WriteLine(fi.LastAccessTime);
+            System.Console.WriteLine(fi.LastAccessTimeUtc);
+            System.Console.WriteLine(fi.LastWriteTime);
+            System.Console.WriteLine(fi.LastWriteTimeUtc);
+        }
     }
 }

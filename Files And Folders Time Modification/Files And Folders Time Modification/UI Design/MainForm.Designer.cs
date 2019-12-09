@@ -29,293 +29,297 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.button_addfolder = new System.Windows.Forms.Button();
+            this.groupBox_folder_list = new System.Windows.Forms.GroupBox();
+            this.groupBox_countinfo = new System.Windows.Forms.GroupBox();
+            this.groupBox_settingbox = new System.Windows.Forms.GroupBox();
+            this.label_setting_accessing_time_label = new System.Windows.Forms.Label();
+            this.label_setting_modifying_time_label = new System.Windows.Forms.Label();
+            this.label_setting_creating_time_label = new System.Windows.Forms.Label();
+            this.textBox_setting_accessing_time = new System.Windows.Forms.TextBox();
+            this.textBox_setting_modifying_time = new System.Windows.Forms.TextBox();
+            this.textBox_setting_creating_time = new System.Windows.Forms.TextBox();
+            this.textBox_default_setting_label = new System.Windows.Forms.TextBox();
+            this.radioButton_specific_setting = new System.Windows.Forms.RadioButton();
+            this.radioButton_default_setting = new System.Windows.Forms.RadioButton();
+            this.groupBox_logoutput = new System.Windows.Forms.GroupBox();
+            this.textBox_logoutput = new System.Windows.Forms.TextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.button_program_start = new System.Windows.Forms.Button();
+            this.button_clear_folder_list = new System.Windows.Forms.Button();
+            this.button_reset_program = new System.Windows.Forms.Button();
+            this.listView_folder = new System.Windows.Forms.ListView();
+            this.listView_countinfo = new System.Windows.Forms.ListView();
+            this.groupBox_folder_list.SuspendLayout();
+            this.groupBox_countinfo.SuspendLayout();
+            this.groupBox_settingbox.SuspendLayout();
+            this.groupBox_logoutput.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // button_addfolder
             // 
-            this.button1.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 25);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "添加文件";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_addfolder.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_addfolder.Location = new System.Drawing.Point(12, 12);
+            this.button_addfolder.Name = "button_addfolder";
+            this.button_addfolder.Size = new System.Drawing.Size(90, 25);
+            this.button_addfolder.TabIndex = 0;
+            this.button_addfolder.Text = "添加文件夹";
+            this.button_addfolder.UseVisualStyleBackColor = true;
+            this.button_addfolder.Click += new System.EventHandler(this.button_addfolder_Click);
             // 
-            // groupBox1
+            // groupBox_folder_list
             // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 43);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(387, 239);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "文件列表";
+            this.groupBox_folder_list.Controls.Add(this.listView_folder);
+            this.groupBox_folder_list.Location = new System.Drawing.Point(12, 43);
+            this.groupBox_folder_list.Name = "groupBox_folder_list";
+            this.groupBox_folder_list.Size = new System.Drawing.Size(387, 239);
+            this.groupBox_folder_list.TabIndex = 1;
+            this.groupBox_folder_list.TabStop = false;
+            this.groupBox_folder_list.Text = "文件夹列表";
             // 
-            // dataGridView1
+            // groupBox_countinfo
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(374, 213);
-            this.dataGridView1.TabIndex = 0;
+            this.groupBox_countinfo.Controls.Add(this.listView_countinfo);
+            this.groupBox_countinfo.Location = new System.Drawing.Point(12, 289);
+            this.groupBox_countinfo.Name = "groupBox_countinfo";
+            this.groupBox_countinfo.Size = new System.Drawing.Size(341, 150);
+            this.groupBox_countinfo.TabIndex = 2;
+            this.groupBox_countinfo.TabStop = false;
+            this.groupBox_countinfo.Text = "统计信息";
             // 
-            // groupBox2
+            // groupBox_settingbox
             // 
-            this.groupBox2.Controls.Add(this.dataGridView2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 289);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(341, 150);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "统计信息";
+            this.groupBox_settingbox.Controls.Add(this.label_setting_accessing_time_label);
+            this.groupBox_settingbox.Controls.Add(this.label_setting_modifying_time_label);
+            this.groupBox_settingbox.Controls.Add(this.label_setting_creating_time_label);
+            this.groupBox_settingbox.Controls.Add(this.textBox_setting_accessing_time);
+            this.groupBox_settingbox.Controls.Add(this.textBox_setting_modifying_time);
+            this.groupBox_settingbox.Controls.Add(this.textBox_setting_creating_time);
+            this.groupBox_settingbox.Controls.Add(this.textBox_default_setting_label);
+            this.groupBox_settingbox.Controls.Add(this.radioButton_specific_setting);
+            this.groupBox_settingbox.Controls.Add(this.radioButton_default_setting);
+            this.groupBox_settingbox.Location = new System.Drawing.Point(405, 43);
+            this.groupBox_settingbox.Name = "groupBox_settingbox";
+            this.groupBox_settingbox.Size = new System.Drawing.Size(319, 239);
+            this.groupBox_settingbox.TabIndex = 3;
+            this.groupBox_settingbox.TabStop = false;
+            this.groupBox_settingbox.Text = "相关设置";
             // 
-            // dataGridView2
+            // label_setting_accessing_time_label
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(7, 21);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(328, 73);
-            this.dataGridView2.TabIndex = 0;
+            this.label_setting_accessing_time_label.AutoSize = true;
+            this.label_setting_accessing_time_label.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_setting_accessing_time_label.Location = new System.Drawing.Point(6, 212);
+            this.label_setting_accessing_time_label.Name = "label_setting_accessing_time_label";
+            this.label_setting_accessing_time_label.Size = new System.Drawing.Size(77, 14);
+            this.label_setting_accessing_time_label.TabIndex = 8;
+            this.label_setting_accessing_time_label.Text = "访问时间：";
             // 
-            // groupBox3
+            // label_setting_modifying_time_label
             // 
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.textBox5);
-            this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.textBox2);
-            this.groupBox3.Controls.Add(this.radioButton2);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Location = new System.Drawing.Point(405, 43);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(319, 239);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "相关设置";
+            this.label_setting_modifying_time_label.AutoSize = true;
+            this.label_setting_modifying_time_label.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_setting_modifying_time_label.Location = new System.Drawing.Point(6, 184);
+            this.label_setting_modifying_time_label.Name = "label_setting_modifying_time_label";
+            this.label_setting_modifying_time_label.Size = new System.Drawing.Size(77, 14);
+            this.label_setting_modifying_time_label.TabIndex = 7;
+            this.label_setting_modifying_time_label.Text = "修改时间：";
             // 
-            // label3
+            // label_setting_creating_time_label
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(6, 212);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 14);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "访问时间：";
+            this.label_setting_creating_time_label.AutoSize = true;
+            this.label_setting_creating_time_label.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_setting_creating_time_label.Location = new System.Drawing.Point(6, 156);
+            this.label_setting_creating_time_label.Name = "label_setting_creating_time_label";
+            this.label_setting_creating_time_label.Size = new System.Drawing.Size(77, 14);
+            this.label_setting_creating_time_label.TabIndex = 6;
+            this.label_setting_creating_time_label.Text = "创建时间：";
             // 
-            // label2
+            // textBox_setting_accessing_time
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 184);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 14);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "修改时间：";
+            this.textBox_setting_accessing_time.Location = new System.Drawing.Point(84, 210);
+            this.textBox_setting_accessing_time.Name = "textBox_setting_accessing_time";
+            this.textBox_setting_accessing_time.Size = new System.Drawing.Size(229, 21);
+            this.textBox_setting_accessing_time.TabIndex = 5;
             // 
-            // label1
+            // textBox_setting_modifying_time
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(6, 156);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 14);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "创建时间：";
+            this.textBox_setting_modifying_time.Location = new System.Drawing.Point(84, 182);
+            this.textBox_setting_modifying_time.Name = "textBox_setting_modifying_time";
+            this.textBox_setting_modifying_time.Size = new System.Drawing.Size(229, 21);
+            this.textBox_setting_modifying_time.TabIndex = 4;
             // 
-            // textBox5
+            // textBox_setting_creating_time
             // 
-            this.textBox5.Location = new System.Drawing.Point(84, 210);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(229, 21);
-            this.textBox5.TabIndex = 5;
+            this.textBox_setting_creating_time.Location = new System.Drawing.Point(84, 154);
+            this.textBox_setting_creating_time.Name = "textBox_setting_creating_time";
+            this.textBox_setting_creating_time.Size = new System.Drawing.Size(229, 21);
+            this.textBox_setting_creating_time.TabIndex = 3;
             // 
-            // textBox4
+            // textBox_default_setting_label
             // 
-            this.textBox4.Location = new System.Drawing.Point(84, 182);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(229, 21);
-            this.textBox4.TabIndex = 4;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(84, 154);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(229, 21);
-            this.textBox3.TabIndex = 3;
-            // 
-            // textBox2
-            // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(22, 43);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(291, 82);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "设置文件夹的“创建时间”为文件夹中所有文件最早的“创建时间”\r\n设置文件夹的“修改时间”为文件夹中所有文件最晚的“修改时间”\r\n设置文件夹的“访问时间”为之前经过" +
+            this.textBox_default_setting_label.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_default_setting_label.Enabled = false;
+            this.textBox_default_setting_label.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_default_setting_label.Location = new System.Drawing.Point(22, 43);
+            this.textBox_default_setting_label.Multiline = true;
+            this.textBox_default_setting_label.Name = "textBox_default_setting_label";
+            this.textBox_default_setting_label.Size = new System.Drawing.Size(291, 82);
+            this.textBox_default_setting_label.TabIndex = 2;
+            this.textBox_default_setting_label.Text = "设置文件夹的“创建时间”为文件夹中所有文件最早的“创建时间”\r\n设置文件夹的“修改时间”为文件夹中所有文件最晚的“修改时间”\r\n设置文件夹的“访问时间”为之前经过" +
     "修改的文件夹的修改时间";
             // 
-            // radioButton2
+            // radioButton_specific_setting
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 131);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 16);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "统一设置";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton_specific_setting.AutoSize = true;
+            this.radioButton_specific_setting.Location = new System.Drawing.Point(6, 131);
+            this.radioButton_specific_setting.Name = "radioButton_specific_setting";
+            this.radioButton_specific_setting.Size = new System.Drawing.Size(71, 16);
+            this.radioButton_specific_setting.TabIndex = 1;
+            this.radioButton_specific_setting.Text = "统一设置";
+            this.radioButton_specific_setting.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radioButton_default_setting
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(71, 16);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "默认设置";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton_default_setting.AutoSize = true;
+            this.radioButton_default_setting.Checked = true;
+            this.radioButton_default_setting.Location = new System.Drawing.Point(7, 21);
+            this.radioButton_default_setting.Name = "radioButton_default_setting";
+            this.radioButton_default_setting.Size = new System.Drawing.Size(71, 16);
+            this.radioButton_default_setting.TabIndex = 0;
+            this.radioButton_default_setting.TabStop = true;
+            this.radioButton_default_setting.Text = "默认设置";
+            this.radioButton_default_setting.UseVisualStyleBackColor = true;
             // 
-            // groupBox4
+            // groupBox_logoutput
             // 
-            this.groupBox4.Controls.Add(this.textBox1);
-            this.groupBox4.Location = new System.Drawing.Point(360, 289);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(364, 150);
-            this.groupBox4.TabIndex = 4;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "日志输出";
+            this.groupBox_logoutput.Controls.Add(this.textBox_logoutput);
+            this.groupBox_logoutput.Location = new System.Drawing.Point(360, 289);
+            this.groupBox_logoutput.Name = "groupBox_logoutput";
+            this.groupBox_logoutput.Size = new System.Drawing.Size(364, 150);
+            this.groupBox_logoutput.TabIndex = 4;
+            this.groupBox_logoutput.TabStop = false;
+            this.groupBox_logoutput.Text = "日志输出";
             // 
-            // textBox1
+            // textBox_logoutput
             // 
-            this.textBox1.Location = new System.Drawing.Point(7, 21);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(351, 123);
-            this.textBox1.TabIndex = 0;
+            this.textBox_logoutput.Location = new System.Drawing.Point(7, 21);
+            this.textBox_logoutput.Multiline = true;
+            this.textBox_logoutput.Name = "textBox_logoutput";
+            this.textBox_logoutput.Size = new System.Drawing.Size(351, 123);
+            this.textBox_logoutput.TabIndex = 0;
             // 
-            // progressBar1
+            // progressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 511);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(624, 31);
-            this.progressBar1.TabIndex = 5;
+            this.progressBar.Location = new System.Drawing.Point(12, 511);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(624, 31);
+            this.progressBar.TabIndex = 5;
             // 
-            // button2
+            // button_program_start
             // 
-            this.button2.Location = new System.Drawing.Point(643, 511);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(81, 31);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "启动";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_program_start.Location = new System.Drawing.Point(643, 511);
+            this.button_program_start.Name = "button_program_start";
+            this.button_program_start.Size = new System.Drawing.Size(81, 31);
+            this.button_program_start.TabIndex = 6;
+            this.button_program_start.Text = "启动";
+            this.button_program_start.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // button_clear_folder_list
             // 
-            this.button3.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Location = new System.Drawing.Point(95, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 25);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "清空列表";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button_clear_folder_list.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_clear_folder_list.Location = new System.Drawing.Point(108, 12);
+            this.button_clear_folder_list.Name = "button_clear_folder_list";
+            this.button_clear_folder_list.Size = new System.Drawing.Size(75, 25);
+            this.button_clear_folder_list.TabIndex = 7;
+            this.button_clear_folder_list.Text = "清空列表";
+            this.button_clear_folder_list.UseVisualStyleBackColor = true;
+            this.button_clear_folder_list.Click += new System.EventHandler(this.button_clear_folder_list_Click);
             // 
-            // button4
+            // button_reset_program
             // 
-            this.button4.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(176, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 25);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "重置程序";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button_reset_program.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_reset_program.Location = new System.Drawing.Point(189, 12);
+            this.button_reset_program.Name = "button_reset_program";
+            this.button_reset_program.Size = new System.Drawing.Size(75, 25);
+            this.button_reset_program.TabIndex = 8;
+            this.button_reset_program.Text = "重置程序";
+            this.button_reset_program.UseVisualStyleBackColor = true;
+            this.button_reset_program.Click += new System.EventHandler(this.button_reset_program_Click);
+            // 
+            // listView_folder
+            // 
+            this.listView_folder.AllowDrop = true;
+            this.listView_folder.HideSelection = false;
+            this.listView_folder.Location = new System.Drawing.Point(6, 20);
+            this.listView_folder.Name = "listView_folder";
+            this.listView_folder.Size = new System.Drawing.Size(375, 213);
+            this.listView_folder.TabIndex = 0;
+            this.listView_folder.UseCompatibleStateImageBehavior = false;
+            this.listView_folder.View = System.Windows.Forms.View.Details;
+            this.listView_folder.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView_folder_DragDrop);
+            this.listView_folder.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView_folder_DragEnter);
+            // 
+            // listView_countinfo
+            // 
+            this.listView_countinfo.HideSelection = false;
+            this.listView_countinfo.Location = new System.Drawing.Point(7, 21);
+            this.listView_countinfo.Name = "listView_countinfo";
+            this.listView_countinfo.Size = new System.Drawing.Size(328, 123);
+            this.listView_countinfo.TabIndex = 0;
+            this.listView_countinfo.UseCompatibleStateImageBehavior = false;
+            this.listView_countinfo.View = System.Windows.Forms.View.Details;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 549);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_reset_program);
+            this.Controls.Add(this.button_clear_folder_list);
+            this.Controls.Add(this.button_program_start);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.groupBox_logoutput);
+            this.Controls.Add(this.groupBox_settingbox);
+            this.Controls.Add(this.groupBox_countinfo);
+            this.Controls.Add(this.groupBox_folder_list);
+            this.Controls.Add(this.button_addfolder);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "文件与文件夹时间修改";
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox_folder_list.ResumeLayout(false);
+            this.groupBox_countinfo.ResumeLayout(false);
+            this.groupBox_settingbox.ResumeLayout(false);
+            this.groupBox_settingbox.PerformLayout();
+            this.groupBox_logoutput.ResumeLayout(false);
+            this.groupBox_logoutput.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button_addfolder;
+        private System.Windows.Forms.GroupBox groupBox_folder_list;
+        private System.Windows.Forms.GroupBox groupBox_countinfo;
+        private System.Windows.Forms.GroupBox groupBox_settingbox;
+        private System.Windows.Forms.GroupBox groupBox_logoutput;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button button_program_start;
+        private System.Windows.Forms.Button button_clear_folder_list;
+        private System.Windows.Forms.Button button_reset_program;
+        private System.Windows.Forms.RadioButton radioButton_specific_setting;
+        private System.Windows.Forms.RadioButton radioButton_default_setting;
+        private System.Windows.Forms.TextBox textBox_logoutput;
+        private System.Windows.Forms.TextBox textBox_default_setting_label;
+        private System.Windows.Forms.TextBox textBox_setting_accessing_time;
+        private System.Windows.Forms.TextBox textBox_setting_modifying_time;
+        private System.Windows.Forms.TextBox textBox_setting_creating_time;
+        private System.Windows.Forms.Label label_setting_modifying_time_label;
+        private System.Windows.Forms.Label label_setting_creating_time_label;
+        private System.Windows.Forms.Label label_setting_accessing_time_label;
+        private System.Windows.Forms.ListView listView_folder;
+        private System.Windows.Forms.ListView listView_countinfo;
     }
 }
 

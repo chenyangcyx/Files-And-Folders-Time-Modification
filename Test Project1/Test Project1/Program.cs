@@ -12,9 +12,10 @@ namespace Test_Project1
         static void Main(string[] args)
         {
             GetFileInfo gfi = new GetFileInfo();
-            gfi.GetInfo("D:\\Code\\Files-And-Folders-Time-Modification");
+            //gfi.GetInfo("D:\\Code\\Files-And-Folders-Time-Modification");
             //DirectoryInfo fi = new DirectoryInfo("D:\\Code\\Files-And-Folders-Time-Modification");
             //gfi.GetParentPath(fi.FullName, fi.Parent);
+            gfi.TestGetFileTime("D:\\Code\\Files-And-Folders-Time-Modification\\Test Project1\\Test Project1\\GetFileInfo.cs");
         }
     }
 }
