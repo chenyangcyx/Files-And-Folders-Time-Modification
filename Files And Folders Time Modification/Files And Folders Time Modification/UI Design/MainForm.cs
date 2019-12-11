@@ -21,6 +21,16 @@ namespace Files_And_Folders_Time_Modification
         {
             InitializeComponent();
             InitAll();
+            //设置选项
+            all.setting_choice = OverAllData.SETTING_DEFAULT;
+            radioButton_default_setting.Checked = true;
+            radioButton_specific_setting.Checked = false;
+            textBox_setting_creating_time.Text = "";
+            textBox_setting_modifying_time.Text = "";
+            textBox_setting_accessing_time.Text = "";
+            textBox_setting_creating_time.Enabled = false;
+            textBox_setting_modifying_time.Enabled = false;
+            textBox_setting_accessing_time.Enabled = false;
         }
 
         //初始化程序
@@ -30,13 +40,7 @@ namespace Files_And_Folders_Time_Modification
             all.file_list.Clear();
             //更新listview列表视图
             uir.RefreshFileListView(listView_folder, all.file_list);
-            //设置选项
-            all.setting_choice = OverAllData.SETTING_DEFAULT;
-            radioButton_default_setting.Checked = true;
-            radioButton_specific_setting.Checked = false;
-            textBox_setting_creating_time.Enabled = false;
-            textBox_setting_modifying_time.Enabled = false;
-            textBox_setting_accessing_time.Enabled = false;
+            //设置选项的更新写在构造函数中
             //统计信息
             uir.RefreshCountInfo(listView_countinfo, false);
         }
@@ -45,6 +49,7 @@ namespace Files_And_Folders_Time_Modification
         private void button_addfolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folder_choose_dialog = new FolderBrowserDialog();
+
             folder_choose_dialog.Description = "请选择要设置的文件夹";
             if (folder_choose_dialog.ShowDialog() != DialogResult.OK)
             {
@@ -90,10 +95,7 @@ namespace Files_And_Folders_Time_Modification
             int file_num = ((Array)e.Data.GetData(DataFormats.FileDrop)).Length;
             string[] all_folder = new string[file_num];
             foreach(object ob in (Array)e.Data.GetData(DataFormats.FileDrop))
-            {
-                if (Directory.Exists(ob.ToString()))
-                    all.file_list.Add(ob.ToString());
-            }
+                all.file_list.Add(ob.ToString());
             //列表的去重操作
             all.file_list = all.file_list.Distinct().ToList();
             //更新UI的图表

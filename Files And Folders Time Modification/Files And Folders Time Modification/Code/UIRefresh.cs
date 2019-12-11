@@ -62,8 +62,8 @@ namespace Files_And_Folders_Time_Modification.Code
             it1_2.Text = OverAllData.LISTVIEW_COUNTINFO_INFO1_FOLDERNUM_STRING;
             it1_2.SubItems.Add("" + all.count_all_folder_count);
             ListViewItem it1_3 = new ListViewItem();
-            it1_2.Text = OverAllData.LISTVIEW_COUNTINFO_INFO1_FOLDERNUM_STRING;
-            it1_2.SubItems.Add("" + all.count_all_folder_count);
+            it1_3.Text = OverAllData.LISTVIEW_COUNTINFO_INFO1_FILEANDFOLDERNUM_STRING;
+            it1_3.SubItems.Add("" + all.count_all_filefolder_count);
             if (if_ok)
             {
                 it1.SubItems.Add("√");
@@ -78,20 +78,47 @@ namespace Files_And_Folders_Time_Modification.Code
                 it1_2.SubItems.Add("×");
                 it1_3.SubItems.Add("×");
             }
+            //中间的空行
+            ListViewItem it_middle_blank = new ListViewItem();
+
             //已完成设置 数量
             ListViewItem it2 = new ListViewItem();
             it2.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_STRING;
-            it2.SubItems.Add("");
-            it2.SubItems.Add("×");
-
+            it2.SubItems.Add(""+all.count_setted_filefolder_count);
             ListViewItem it2_1 = new ListViewItem();
+            it2_1.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_FILENUM_STRING;
+            it2_1.SubItems.Add("" + all.count_setted_file_count);
             ListViewItem it2_2 = new ListViewItem();
+            it2_2.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_FOLDERNUM_STRING;
+            it2_2.SubItems.Add("" + all.count_setted_folder_count);
             ListViewItem it2_3 = new ListViewItem();
+            it2_3.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_FILEANDFOLDERNUM_STRING;
+            it2_3.SubItems.Add("" + all.count_setted_filefolder_count);
+            //检查是否完成设置
+            if (all.count_setted_filefolder_count < all.count_all_filefolder_count || all.count_setted_filefolder_count == 0)
+            {
+                it2.SubItems.Add("×");
+                it2_3.SubItems.Add("×");
+            }
+            else
+            {
+                it2.SubItems.Add("√");
+                it2_3.SubItems.Add("√");
+            }
+            if (all.count_setted_file_count < all.count_all_file_count || all.count_setted_file_count == 0)
+                it2_1.SubItems.Add("×");
+            else
+                it2_1.SubItems.Add("√");
+            if (all.count_setted_folder_count < all.count_all_folder_count || all.count_setted_folder_count == 0)
+                it2_2.SubItems.Add("×");
+            else
+                it2_2.SubItems.Add("√");
 
             lv.Items.Add(it1);
             lv.Items.Add(it1_1);
             lv.Items.Add(it1_2);
             lv.Items.Add(it1_3);
+            lv.Items.Add(it_middle_blank);
             lv.Items.Add(it2);
             lv.Items.Add(it2_1);
             lv.Items.Add(it2_2);
