@@ -25,6 +25,17 @@ namespace Test_Project2
             //    //测试i的最大值
             //    Console.WriteLine(i++);
             //}
+
+
+            int year, month, day, hour, minute, second;
+            TestDateTimeUtil tdtu = new TestDateTimeUtil();
+            tdtu.GetDateTimeValueFromString("2019/12/11 23:20:11", out year, out month, out day, out hour, out minute, out second);
+            Console.WriteLine("year = " + year);
+            Console.WriteLine("month = " + month);
+            Console.WriteLine("day = " + day);
+            Console.WriteLine("hour = " + hour);
+            Console.WriteLine("minute = " + minute);
+            Console.WriteLine("second = " + second);
         }
     }
 }

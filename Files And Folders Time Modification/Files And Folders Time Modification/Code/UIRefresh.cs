@@ -1,5 +1,4 @@
-﻿using Files_And_Folders_Time_Modification.Code;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +30,10 @@ namespace Files_And_Folders_Time_Modification.Code
             {
                 ListViewItem it = new ListViewItem();
                 it.Text = "" + (i++);
-                it.SubItems.Add(System.IO.Path.GetFileName(str));
+                if(!string.IsNullOrEmpty(System.IO.Path.GetFileName(str)))
+                    it.SubItems.Add(System.IO.Path.GetFileName(str));
+                else
+                    it.SubItems.Add(str);
                 it.SubItems.Add(str);
                 lv.Items.Add(it);
             }

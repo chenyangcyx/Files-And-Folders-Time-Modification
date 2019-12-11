@@ -16,11 +16,14 @@ namespace Files_And_Folders_Time_Modification
     {
         OverAllData all = OverAllData.alldata;
         UIRefresh uir = new UIRefresh();
+        LogOutput lop;
 
         public MainForm()
         {
             InitializeComponent();
             InitAll();
+            //LogOutput类的初始化
+            lop = new LogOutput(textBox_logoutput);
             //设置选项
             all.setting_choice = OverAllData.SETTING_DEFAULT;
             radioButton_default_setting.Checked = true;
@@ -42,7 +45,15 @@ namespace Files_And_Folders_Time_Modification
             uir.RefreshFileListView(listView_folder, all.file_list);
             //设置选项的更新写在构造函数中
             //统计信息
+            all.count_all_file_count = OverAllData.COUNT_ALL_FILE_COUNT_INTI;
+            all.count_all_folder_count = OverAllData.COUNT_ALL_FOLDER_COUNT_INTI;
+            all.count_all_filefolder_count = OverAllData.COUNT_ALL_FILEFOLDER_COUNT_INIT;
+            all.count_setted_file_count = OverAllData.COUNT_SETTED_FILE_COUNT_INIT;
+            all.count_setted_folder_count = OverAllData.COUNT_SETTED_FOLDER_COUNT_INIT;
+            all.count_setted_filefolder_count = OverAllData.COUNT_SETTED_FILEFOLDER_COUNT_INIT;
             uir.RefreshCountInfo(listView_countinfo, false);
+            //输出日志
+            textBox_logoutput.Clear();
         }
 
         //按钮“添加文件夹”操作
@@ -60,6 +71,8 @@ namespace Files_And_Folders_Time_Modification
             {
                 //添加到文件列表
                 all.file_list.Add(folder_choose_dialog.SelectedPath);
+                //输出日志
+                lop.AddFileAndFolder(folder_choose_dialog.SelectedPath);
                 //列表的去重操作
                 all.file_list = all.file_list.Distinct().ToList();
                 //更新UI的图表
@@ -71,6 +84,7 @@ namespace Files_And_Folders_Time_Modification
         private void button_clear_folder_list_Click(object sender, EventArgs e)
         {
             all.file_list.Clear();
+            lop.ClearFileList();
             uir.RefreshFileListView(listView_folder, all.file_list);
         }
 
@@ -95,7 +109,10 @@ namespace Files_And_Folders_Time_Modification
             int file_num = ((Array)e.Data.GetData(DataFormats.FileDrop)).Length;
             string[] all_folder = new string[file_num];
             foreach(object ob in (Array)e.Data.GetData(DataFormats.FileDrop))
+            {
                 all.file_list.Add(ob.ToString());
+                lop.AddFileAndFolder(ob.ToString());
+            }
             //列表的去重操作
             all.file_list = all.file_list.Distinct().ToList();
             //更新UI的图表
@@ -112,6 +129,7 @@ namespace Files_And_Folders_Time_Modification
                 textBox_setting_modifying_time.Enabled = false;
                 textBox_setting_accessing_time.Enabled = false;
                 all.setting_choice = OverAllData.SETTING_DEFAULT;
+                lop.ChangeSettingToDefaultSetting();
             }
         }
 
@@ -125,7 +143,24 @@ namespace Files_And_Folders_Time_Modification
                 textBox_setting_modifying_time.Enabled = true;
                 textBox_setting_accessing_time.Enabled = true;
                 all.setting_choice = OverAllData.SETTING_SPECIFIC;
+                lop.ChangeSettingToSpecificSetting();
             }
+        }
+
+        //按钮“启动”操作
+        private void button_program_start_Click(object sender, EventArgs e)
+        {
+            lop.StartSettingInfo();
+            //检查文件列表
+            lop.StartSettingCheck("文件列表内容");
+            if (all.file_list.Count != 0)
+                lop.StartSettingCheckResultShow(true);
+            else
+            {
+                lop.StartSettingCheckResultShow(false);
+                return;
+            }
+            //检查设置
         }
     }
 }

@@ -55,6 +55,9 @@ namespace Files_And_Folders_Time_Modification
             this.button_clear_folder_list = new System.Windows.Forms.Button();
             this.button_reset_program = new System.Windows.Forms.Button();
             this.button_addfolder_tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox_setting_accessing_time_tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox_setting_modifying_time_tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox_setting_creating_time_tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox_folder_list.SuspendLayout();
             this.groupBox_countinfo.SuspendLayout();
             this.groupBox_settingbox.SuspendLayout();
@@ -90,6 +93,7 @@ namespace Files_And_Folders_Time_Modification
             // 
             this.listView_folder.AllowDrop = true;
             this.listView_folder.FullRowSelect = true;
+            this.listView_folder.HideSelection = false;
             this.listView_folder.Location = new System.Drawing.Point(8, 25);
             this.listView_folder.Margin = new System.Windows.Forms.Padding(4);
             this.listView_folder.Name = "listView_folder";
@@ -184,11 +188,7 @@ namespace Files_And_Folders_Time_Modification
             this.textBox_setting_accessing_time.Name = "textBox_setting_accessing_time";
             this.textBox_setting_accessing_time.Size = new System.Drawing.Size(304, 25);
             this.textBox_setting_accessing_time.TabIndex = 5;
-            ToolTip textBox_setting_accessing_time_tooltip = new ToolTip();
-            textBox_setting_accessing_time_tooltip.AutoPopDelay = 10000;
-            textBox_setting_accessing_time_tooltip.InitialDelay = 200;
-            textBox_setting_accessing_time_tooltip.ReshowDelay = 200;
-            textBox_setting_accessing_time_tooltip.SetToolTip(this.textBox_setting_accessing_time, "格式：1970/01/01 00:00:00");
+            this.textBox_setting_accessing_time_tooltip.SetToolTip(this.textBox_setting_accessing_time, "格式：1970/01/01 00:00:00");
             // 
             // textBox_setting_modifying_time
             // 
@@ -197,11 +197,7 @@ namespace Files_And_Folders_Time_Modification
             this.textBox_setting_modifying_time.Name = "textBox_setting_modifying_time";
             this.textBox_setting_modifying_time.Size = new System.Drawing.Size(304, 25);
             this.textBox_setting_modifying_time.TabIndex = 4;
-            ToolTip textBox_setting_modifying_time_tooltip = new ToolTip();
-            textBox_setting_modifying_time_tooltip.AutoPopDelay = 10000;
-            textBox_setting_modifying_time_tooltip.InitialDelay = 200;
-            textBox_setting_modifying_time_tooltip.ReshowDelay = 200;
-            textBox_setting_modifying_time_tooltip.SetToolTip(this.textBox_setting_modifying_time, "格式：1970/01/01 00:00:00");
+            this.textBox_setting_modifying_time_tooltip.SetToolTip(this.textBox_setting_modifying_time, "格式：1970/01/01 00:00:00");
             // 
             // textBox_setting_creating_time
             // 
@@ -210,11 +206,7 @@ namespace Files_And_Folders_Time_Modification
             this.textBox_setting_creating_time.Name = "textBox_setting_creating_time";
             this.textBox_setting_creating_time.Size = new System.Drawing.Size(304, 25);
             this.textBox_setting_creating_time.TabIndex = 3;
-            ToolTip textBox_setting_creating_time_tooltip = new ToolTip();
-            textBox_setting_creating_time_tooltip.AutoPopDelay = 10000;
-            textBox_setting_creating_time_tooltip.InitialDelay = 200;
-            textBox_setting_creating_time_tooltip.ReshowDelay = 200;
-            textBox_setting_creating_time_tooltip.SetToolTip(this.textBox_setting_creating_time, "格式：1970/01/01 00:00:00");
+            this.textBox_setting_creating_time_tooltip.SetToolTip(this.textBox_setting_creating_time, "格式：1970/01/01 00:00:00");
             // 
             // textBox_default_setting_label
             // 
@@ -272,8 +264,10 @@ namespace Files_And_Folders_Time_Modification
             // 
             this.textBox_logoutput.Location = new System.Drawing.Point(8, 26);
             this.textBox_logoutput.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_logoutput.MaxLength = 999999999;
             this.textBox_logoutput.Multiline = true;
             this.textBox_logoutput.Name = "textBox_logoutput";
+            this.textBox_logoutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_logoutput.Size = new System.Drawing.Size(588, 222);
             this.textBox_logoutput.TabIndex = 0;
             // 
@@ -295,6 +289,7 @@ namespace Files_And_Folders_Time_Modification
             this.button_program_start.TabIndex = 6;
             this.button_program_start.Text = "启 动";
             this.button_program_start.UseVisualStyleBackColor = true;
+            this.button_program_start.Click += new System.EventHandler(this.button_program_start_Click);
             // 
             // button_clear_folder_list
             // 
@@ -326,6 +321,24 @@ namespace Files_And_Folders_Time_Modification
             this.button_addfolder_tooltip.InitialDelay = 200;
             this.button_addfolder_tooltip.ReshowDelay = 200;
             this.button_addfolder_tooltip.ShowAlways = true;
+            // 
+            // textBox_setting_accessing_time_tooltip
+            // 
+            this.textBox_setting_accessing_time_tooltip.AutoPopDelay = 10000;
+            this.textBox_setting_accessing_time_tooltip.InitialDelay = 200;
+            this.textBox_setting_accessing_time_tooltip.ReshowDelay = 200;
+            // 
+            // textBox_setting_modifying_time_tooltip
+            // 
+            this.textBox_setting_modifying_time_tooltip.AutoPopDelay = 10000;
+            this.textBox_setting_modifying_time_tooltip.InitialDelay = 200;
+            this.textBox_setting_modifying_time_tooltip.ReshowDelay = 200;
+            // 
+            // textBox_setting_creating_time_tooltip
+            // 
+            this.textBox_setting_creating_time_tooltip.AutoPopDelay = 10000;
+            this.textBox_setting_creating_time_tooltip.InitialDelay = 200;
+            this.textBox_setting_creating_time_tooltip.ReshowDelay = 200;
             // 
             // MainForm
             // 
@@ -382,6 +395,9 @@ namespace Files_And_Folders_Time_Modification
         private System.Windows.Forms.ListView listView_folder;
         private System.Windows.Forms.ListView listView_countinfo;
         private ToolTip button_addfolder_tooltip;
+        private ToolTip textBox_setting_accessing_time_tooltip;
+        private ToolTip textBox_setting_modifying_time_tooltip;
+        private ToolTip textBox_setting_creating_time_tooltip;
     }
 }
 
