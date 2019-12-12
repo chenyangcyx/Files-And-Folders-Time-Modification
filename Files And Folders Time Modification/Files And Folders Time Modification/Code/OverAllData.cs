@@ -59,8 +59,9 @@ namespace Files_And_Folders_Time_Modification.Code
         public int count_setted_file_count = COUNT_SETTED_FILE_COUNT_INIT;
         public int count_setted_folder_count = COUNT_SETTED_FOLDER_COUNT_INIT;
         public int count_setted_filefolder_count = COUNT_SETTED_FILEFOLDER_COUNT_INIT;
-        //日志输出
-        public string output_log = "";
+        //文件/文件夹的标识
+        public const int FILETYPE_FILE = 1;
+        public const int FILETYPE_FOLDER = 2;
 
         //运行时变量
         Queue<FileFolderInfoNode> folder_info_temp_queue = new Queue<FileFolderInfoNode>();

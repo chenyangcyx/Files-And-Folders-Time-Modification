@@ -16,6 +16,12 @@ namespace Files_And_Folders_Time_Modification.Code
             box = textbox;
         }
 
+        //普通消息的输出
+        public void CommonStringOutput(string str)
+        {
+            box.AppendText(str + Environment.NewLine);
+        }
+
         //添加文件/文件夹事件
         public void AddFileAndFolder(string path)
         {
@@ -52,6 +58,15 @@ namespace Files_And_Folders_Time_Modification.Code
             box.AppendText("检查：" + check_content);
         }
 
+        //程序检查-设置内容
+        public void StartSettingCheckSettings(int setting_num)
+        {
+            if (setting_num == 1)
+                box.AppendText("默认设置");
+            else
+                box.AppendText("统一设置");
+        }
+
         //程序检查结果显示
         public void StartSettingCheckResultShow(bool result)
         {
@@ -59,6 +74,12 @@ namespace Files_And_Folders_Time_Modification.Code
                 box.AppendText("...............OK" + Environment.NewLine);
             else
                 box.AppendText("...............Fail" + Environment.NewLine);
+        }
+
+        //检索文件夹内的文件和文件夹
+        public void CheckFileAndFolder(string path)
+        {
+            box.AppendText("开始检查文件/文件夹：" + path + Environment.NewLine);
         }
     }
 }

@@ -17,6 +17,8 @@ namespace Files_And_Folders_Time_Modification
         OverAllData all = OverAllData.alldata;
         UIRefresh uir = new UIRefresh();
         LogOutput lop;
+        Utils ut = new Utils();
+        FileAndFolderFunction faff = new FileAndFolderFunction();
 
         public MainForm()
         {
@@ -106,8 +108,6 @@ namespace Files_And_Folders_Time_Modification
         //ListView_folder拖入后操作
         private void listView_folder_DragDrop(object sender, DragEventArgs e)
         {
-            int file_num = ((Array)e.Data.GetData(DataFormats.FileDrop)).Length;
-            string[] all_folder = new string[file_num];
             foreach(object ob in (Array)e.Data.GetData(DataFormats.FileDrop))
             {
                 all.file_list.Add(ob.ToString());
@@ -161,6 +161,62 @@ namespace Files_And_Folders_Time_Modification
                 return;
             }
             //检查设置
+            lop.StartSettingCheck("设置内容，");
+            int     year_create = 0, month_create = 0, day_create = 0, hour_create = 0, minute_create = 0, second_create = 0,
+                    year_modify = 0, month_modify = 0, day_modify = 0, hour_modify = 0, minute_modify = 0, second_modify = 0,
+                    year_access = 0, month_access = 0, day_access = 0, hour_access = 0, minute_access = 0, second_access = 0;
+            if (radioButton_default_setting.Checked)
+            {
+                lop.StartSettingCheckSettings(1);
+                lop.StartSettingCheckResultShow(true);
+            }
+            else
+            {
+                lop.StartSettingCheckSettings(2);
+                //检查输入的时间格式
+                lop.StartSettingCheck("时间格式");
+                if (ut.CheckTimeString(textBox_setting_creating_time.Text) && ut.CheckTimeString(textBox_setting_modifying_time.Text)
+                    && ut.CheckTimeString(textBox_setting_accessing_time.Text))
+                    lop.StartSettingCheckResultShow(true);
+                else
+                    return;
+                ut.GetDateTimeValueFromString(textBox_setting_creating_time.Text, out year_create, out month_create, out day_create,
+                    out hour_create, out minute_create, out second_create);
+                ut.GetDateTimeValueFromString(textBox_setting_modifying_time.Text, out year_modify, out month_modify, out day_modify,
+                    out hour_modify, out minute_modify, out second_modify);
+                ut.GetDateTimeValueFromString(textBox_setting_accessing_time.Text, out year_access, out month_access, out day_access,
+                    out hour_access, out minute_access, out second_access);
+                lop.CommonStringOutput("创建时间：" + textBox_setting_creating_time.Text);
+                lop.CommonStringOutput("修改时间：" + textBox_setting_modifying_time.Text);
+                lop.CommonStringOutput("访问时间：" + textBox_setting_accessing_time.Text);
+            }
+
+            /*开始执行*/
+            //创建设置的时间类型
+            DateTime dt_create = new DateTime(year_create, month_create, day_create, hour_create, minute_create, second_create, DateTimeKind.Local);
+            DateTime dt_modify = new DateTime(year_modify, month_modify, day_modify, hour_modify, minute_modify, second_modify, DateTimeKind.Local);
+            DateTime dt_access = new DateTime(year_access, month_access, day_access, hour_access, minute_access, second_access, DateTimeKind.Local);
+            foreach(string path in all.file_list)
+            {
+                lop.CheckFileAndFolder(path);
+                //检查这个路径是文件还是文件夹
+                int file_type = faff.CheckIfFileOrFolder(path);
+                //如果是文件，进行相应的操作
+                if (file_type == OverAllData.FILETYPE_FILE)
+                {
+
+                }
+                //如果是文件夹
+                else
+                {
+
+                }
+                //检索每一个文件夹所包含的信息，并为此创建数据结构
+
+                //根据之前创建的，按照设置规则进行修改时间
+
+                //
+            }
         }
     }
 }
