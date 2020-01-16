@@ -22,5 +22,12 @@ namespace Test_Project2
             minute = int.Parse(time_str[1]);
             second = int.Parse(time_str[2]);
         }
+
+        //测试DateTime的直接输出形式
+        public void OutputDateTimeInConsole(int year, int month, int day, int hour, int minute, int second)
+        {
+            DateTime dt = new DateTime(year, month, day, hour, minute, second, DateTimeKind.Local);
+            Console.WriteLine("时间：" + dt + Environment.NewLine);
+        }
     }
 }

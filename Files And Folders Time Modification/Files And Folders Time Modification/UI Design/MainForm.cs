@@ -42,11 +42,11 @@ namespace Files_And_Folders_Time_Modification
         private void InitAll()
         {
             //初始化filelist列表
-            all.file_list.Clear();
+            all.listview_file_list.Clear();
             //更新listview列表视图
-            uir.RefreshFileListView(listView_folder, all.file_list);
+            uir.RefreshFileListView(listView_folder, all.listview_file_list);
             //设置选项的更新写在构造函数中
-            //统计信息
+            //重置统计信息
             all.count_all_file_count = OverAllData.COUNT_ALL_FILE_COUNT_INTI;
             all.count_all_folder_count = OverAllData.COUNT_ALL_FOLDER_COUNT_INTI;
             all.count_all_filefolder_count = OverAllData.COUNT_ALL_FILEFOLDER_COUNT_INIT;
@@ -72,22 +72,33 @@ namespace Files_And_Folders_Time_Modification
             else
             {
                 //添加到文件列表
-                all.file_list.Add(folder_choose_dialog.SelectedPath);
+                all.listview_file_list.Add(folder_choose_dialog.SelectedPath);
                 //输出日志
                 lop.AddFileAndFolder(folder_choose_dialog.SelectedPath);
                 //列表的去重操作
-                all.file_list = all.file_list.Distinct().ToList();
+                all.listview_file_list = all.listview_file_list.Distinct().ToList();
                 //更新UI的图表
-                uir.RefreshFileListView(listView_folder, all.file_list);
+                uir.RefreshFileListView(listView_folder, all.listview_file_list);
+                //更新统计信息
+                faff.RefreshCountInfoByFileList(all.listview_file_list);
+                uir.RefreshCountInfo(listView_countinfo, true);
             }
         }
 
         //按钮“清空列表”操作
         private void button_clear_folder_list_Click(object sender, EventArgs e)
         {
-            all.file_list.Clear();
+            all.listview_file_list.Clear();
             lop.ClearFileList();
-            uir.RefreshFileListView(listView_folder, all.file_list);
+            uir.RefreshFileListView(listView_folder, all.listview_file_list);
+            //重置统计信息
+            all.count_all_file_count = OverAllData.COUNT_ALL_FILE_COUNT_INTI;
+            all.count_all_folder_count = OverAllData.COUNT_ALL_FOLDER_COUNT_INTI;
+            all.count_all_filefolder_count = OverAllData.COUNT_ALL_FILEFOLDER_COUNT_INIT;
+            all.count_setted_file_count = OverAllData.COUNT_SETTED_FILE_COUNT_INIT;
+            all.count_setted_folder_count = OverAllData.COUNT_SETTED_FOLDER_COUNT_INIT;
+            all.count_setted_filefolder_count = OverAllData.COUNT_SETTED_FILEFOLDER_COUNT_INIT;
+            uir.RefreshCountInfo(listView_countinfo, false);
         }
 
         //按钮“重置程序”操作
@@ -110,13 +121,16 @@ namespace Files_And_Folders_Time_Modification
         {
             foreach(object ob in (Array)e.Data.GetData(DataFormats.FileDrop))
             {
-                all.file_list.Add(ob.ToString());
+                all.listview_file_list.Add(ob.ToString());
                 lop.AddFileAndFolder(ob.ToString());
             }
             //列表的去重操作
-            all.file_list = all.file_list.Distinct().ToList();
+            all.listview_file_list = all.listview_file_list.Distinct().ToList();
             //更新UI的图表
-            uir.RefreshFileListView(listView_folder, all.file_list);
+            uir.RefreshFileListView(listView_folder, all.listview_file_list);
+            //更新统计信息
+            faff.RefreshCountInfoByFileList(all.listview_file_list);
+            uir.RefreshCountInfo(listView_countinfo, true);
         }
 
         //相关设置-默认设置
@@ -153,7 +167,7 @@ namespace Files_And_Folders_Time_Modification
             lop.StartSettingInfo();
             //检查文件列表
             lop.StartSettingCheck("文件列表内容");
-            if (all.file_list.Count != 0)
+            if (all.listview_file_list.Count != 0)
                 lop.StartSettingCheckResultShow(true);
             else
             {
@@ -196,26 +210,34 @@ namespace Files_And_Folders_Time_Modification
             DateTime dt_create = new DateTime(year_create, month_create, day_create, hour_create, minute_create, second_create, DateTimeKind.Local);
             DateTime dt_modify = new DateTime(year_modify, month_modify, day_modify, hour_modify, minute_modify, second_modify, DateTimeKind.Local);
             DateTime dt_access = new DateTime(year_access, month_access, day_access, hour_access, minute_access, second_access, DateTimeKind.Local);
-            foreach(string path in all.file_list)
+            foreach(string path in all.listview_file_list)
             {
                 lop.CheckFileAndFolder(path);
                 //检查这个路径是文件还是文件夹
                 int file_type = faff.CheckIfFileOrFolder(path);
-                //如果是文件，进行相应的操作
+                //如果是文件
                 if (file_type == OverAllData.FILETYPE_FILE)
                 {
-
+                    //默认设置——没什么需要做的
+                    //统一设置
+                    if (radioButton_specific_setting.Checked)
+                    {
+                        faff.SetFileORFolderTime(path, OverAllData.FILETYPE_FILE, dt_create, dt_modify, dt_access);
+                        lop.ChangeFileORFolderTime(OverAllData.FILETYPE_FILE, new FileInfo(path).Name, dt_create, dt_modify, dt_access);
+                    }
                 }
                 //如果是文件夹
-                else
+                else if(file_type==OverAllData.FILETYPE_FOLDER)
                 {
+                    //默认设置
+                    //统一设置
 
                 }
-                //检索每一个文件夹所包含的信息，并为此创建数据结构
-
-                //根据之前创建的，按照设置规则进行修改时间
-
-                //
+                //如果路径不存在
+                else
+                {
+                    lop.PathIsNull(path);
+                }
             }
         }
     }

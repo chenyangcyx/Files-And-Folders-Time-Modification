@@ -34,7 +34,7 @@ namespace Files_And_Folders_Time_Modification.Code
         public const string LISTVIEW_COUNTINFO_INFO2_FILEANDFOLDERNUM_STRING = "文件及文件夹";
 
         //文件列表
-        public List<string> file_list = new List<string>();
+        public List<string> listview_file_list = new List<string>();
         //相关设置--设置的选择
         public const int SETTING_DEFAULT = 1;
         public const int SETTING_SPECIFIC = 2;

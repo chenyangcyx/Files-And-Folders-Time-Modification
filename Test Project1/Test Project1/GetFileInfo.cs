@@ -46,5 +46,16 @@ namespace Test_Project1
             System.Console.WriteLine(fi.LastWriteTime);
             System.Console.WriteLine(fi.LastWriteTimeUtc);
         }
+
+        //检查指定路径是文件还是文件夹
+        public void CheckIfFileOrFolder(string path)
+        {
+            if (File.Exists(path))
+                Console.WriteLine("文件！\n");
+            else if (Directory.Exists(path))
+                Console.WriteLine("文件夹！\n");
+            else
+                Console.WriteLine("不存在该路径！");
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace Files_And_Folders_Time_Modification.Code
         public void RefreshCountInfo(ListView lv,bool if_ok)
         {
             lv.BeginUpdate();
+            lv.Clear();
             AddCountInfoListTitle(lv);
             //文件及文件夹 数量
             ListViewItem it1 = new ListViewItem();

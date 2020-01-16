@@ -36,6 +36,7 @@ namespace Test_Project2
             Console.WriteLine("hour = " + hour);
             Console.WriteLine("minute = " + minute);
             Console.WriteLine("second = " + second);
+            tdtu.OutputDateTimeInConsole(2019, 12, 12, 12, 12, 12);
         }
     }
 }

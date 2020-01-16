@@ -81,5 +81,24 @@ namespace Files_And_Folders_Time_Modification.Code
         {
             box.AppendText("开始检查文件/文件夹：" + path + Environment.NewLine);
         }
+
+        //传入的路径为空路径
+        public void PathIsNull(string path)
+        {
+            box.AppendText("传入的路径：" + path + "  是空路径，跳过！" + Environment.NewLine);
+        }
+
+        //设置文件、文件夹的日期
+        public void ChangeFileORFolderTime(int type,string name,DateTime dt_create,DateTime dt_modify,DateTime dt_access)
+        {
+            if (type == OverAllData.FILETYPE_FILE)
+            {
+                box.AppendText("设置文件：" + name + "的创建时间：" + dt_create + "，修改时间：" + dt_modify + "，访问时间：" + dt_access + Environment.NewLine);
+            }
+            else if(type==OverAllData.FILETYPE_FOLDER)
+            {
+                box.AppendText("设置文件夹：" + name + "的创建时间：" + dt_create + "，修改时间：" + dt_modify + "，访问时间：" + dt_access + Environment.NewLine);
+            }
+        }
     }
 }

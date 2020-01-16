@@ -15,7 +15,8 @@ namespace Test_Project1
             //gfi.GetInfo("D:\\Code\\Files-And-Folders-Time-Modification");
             //DirectoryInfo fi = new DirectoryInfo("D:\\Code\\Files-And-Folders-Time-Modification");
             //gfi.GetParentPath(fi.FullName, fi.Parent);
-            gfi.TestGetFileTime("D:\\Code\\Files-And-Folders-Time-Modification\\Test Project1\\Test Project1\\GetFileInfo.cs");
+            //gfi.TestGetFileTime("D:\\Code\\Files-And-Folders-Time-Modification\\Test Project1\\Test Project1\\GetFileInfo.cs");
+            gfi.CheckIfFileOrFolder("D:\\Code\\Files-And-Folders-Time-Modification\\Test Project1\\Test Project11");
         }
     }
 }
