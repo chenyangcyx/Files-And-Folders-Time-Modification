@@ -64,7 +64,7 @@ namespace Files_And_Folders_Time_Modification.Code
         public const int FILETYPE_FOLDER = 2;
 
         //运行时变量
-        Queue<FileFolderInfoNode> folder_info_temp_queue = new Queue<FileFolderInfoNode>();
-        List<FileFolderInfoNode> filefolder_info_temp_list = new List<FileFolderInfoNode>();
+        public List<FileFolderInfoNode> list_all_filefolder = new List<FileFolderInfoNode>();         //统计的所有文件和文件夹的列表
+        public List<FileFolderInfoNode> list_all_folder = new List<FileFolderInfoNode>();             //统计的所有文件夹的列表
     }
 }

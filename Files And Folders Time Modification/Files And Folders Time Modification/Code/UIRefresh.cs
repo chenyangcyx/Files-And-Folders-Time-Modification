@@ -98,24 +98,34 @@ namespace Files_And_Folders_Time_Modification.Code
             it2_3.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_FILEANDFOLDERNUM_STRING;
             it2_3.SubItems.Add("" + all.count_setted_filefolder_count);
             //检查是否完成设置
-            if (all.count_setted_filefolder_count < all.count_all_filefolder_count || all.count_setted_filefolder_count == 0)
-            {
-                it2.SubItems.Add("×");
-                it2_3.SubItems.Add("×");
-            }
-            else
+            if (all.count_setted_filefolder_count == all.count_all_filefolder_count&&all.count_all_filefolder_count!=0)
             {
                 it2.SubItems.Add("√");
+                it2_1.SubItems.Add("√");
+                it2_2.SubItems.Add("√");
                 it2_3.SubItems.Add("√");
             }
-            if (all.count_setted_file_count < all.count_all_file_count || all.count_setted_file_count == 0)
-                it2_1.SubItems.Add("×");
             else
-                it2_1.SubItems.Add("√");
-            if (all.count_setted_folder_count < all.count_all_folder_count || all.count_setted_folder_count == 0)
-                it2_2.SubItems.Add("×");
-            else
-                it2_2.SubItems.Add("√");
+            {
+                if (all.count_setted_filefolder_count < all.count_all_filefolder_count || all.count_setted_filefolder_count == 0)
+                {
+                    it2.SubItems.Add("×");
+                    it2_3.SubItems.Add("×");
+                }
+                else
+                {
+                    it2.SubItems.Add("√");
+                    it2_3.SubItems.Add("√");
+                }
+                if (all.count_setted_file_count < all.count_all_file_count || all.count_setted_file_count == 0)
+                    it2_1.SubItems.Add("×");
+                else
+                    it2_1.SubItems.Add("√");
+                if (all.count_setted_folder_count < all.count_all_folder_count || all.count_setted_folder_count == 0)
+                    it2_2.SubItems.Add("×");
+                else
+                    it2_2.SubItems.Add("√");
+            }
 
             lv.Items.Add(it1);
             lv.Items.Add(it1_1);

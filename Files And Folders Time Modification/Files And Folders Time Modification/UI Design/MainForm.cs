@@ -80,7 +80,7 @@ namespace Files_And_Folders_Time_Modification
                 //更新UI的图表
                 uir.RefreshFileListView(listView_folder, all.listview_file_list);
                 //更新统计信息
-                faff.RefreshCountInfoByFileList(all.listview_file_list);
+                faff.RefreshCountInfoByFileList(all.listview_file_list, out all.count_all_filefolder_count, out all.count_all_file_count, out all.count_all_folder_count);
                 uir.RefreshCountInfo(listView_countinfo, true);
             }
         }
@@ -129,7 +129,7 @@ namespace Files_And_Folders_Time_Modification
             //更新UI的图表
             uir.RefreshFileListView(listView_folder, all.listview_file_list);
             //更新统计信息
-            faff.RefreshCountInfoByFileList(all.listview_file_list);
+            faff.RefreshCountInfoByFileList(all.listview_file_list, out all.count_all_filefolder_count, out all.count_all_file_count, out all.count_all_folder_count);
             uir.RefreshCountInfo(listView_countinfo, true);
         }
 
@@ -206,37 +206,82 @@ namespace Files_And_Folders_Time_Modification
             }
 
             /*开始执行*/
-            //创建设置的时间类型
-            DateTime dt_create = new DateTime(year_create, month_create, day_create, hour_create, minute_create, second_create, DateTimeKind.Local);
-            DateTime dt_modify = new DateTime(year_modify, month_modify, day_modify, hour_modify, minute_modify, second_modify, DateTimeKind.Local);
-            DateTime dt_access = new DateTime(year_access, month_access, day_access, hour_access, minute_access, second_access, DateTimeKind.Local);
-            foreach(string path in all.listview_file_list)
+            //指定设置
+            if (radioButton_specific_setting.Checked)
             {
-                lop.CheckFileAndFolder(path);
-                //检查这个路径是文件还是文件夹
-                int file_type = faff.CheckIfFileOrFolder(path);
-                //如果是文件
-                if (file_type == OverAllData.FILETYPE_FILE)
+                //创建设置的时间类型
+                DateTime dt_create = new DateTime(year_create, month_create, day_create, hour_create, minute_create, second_create, DateTimeKind.Local);
+                DateTime dt_modify = new DateTime(year_modify, month_modify, day_modify, hour_modify, minute_modify, second_modify, DateTimeKind.Local);
+                DateTime dt_access = new DateTime(year_access, month_access, day_access, hour_access, minute_access, second_access, DateTimeKind.Local);
+                foreach (string path in all.listview_file_list)
                 {
-                    //默认设置——没什么需要做的
-                    //统一设置
-                    if (radioButton_specific_setting.Checked)
+                    //重置存储数据的链表
+                    all.list_all_filefolder.Clear();
+                    all.list_all_folder.Clear();
+                    //输出信息
+                    lop.CheckFileAndFolder(path);
+                    //检查这个路径是文件还是文件夹
+                    int file_type = faff.CheckIfFileOrFolder(path);
+                    //如果是文件
+                    if (file_type == OverAllData.FILETYPE_FILE)
                     {
-                        faff.SetFileORFolderTime(path, OverAllData.FILETYPE_FILE, dt_create, dt_modify, dt_access);
-                        lop.ChangeFileORFolderTime(OverAllData.FILETYPE_FILE, new FileInfo(path).Name, dt_create, dt_modify, dt_access);
+                        faff.SetFileORFolderTime(path, OverAllData.FILETYPE_FILE, dt_create, dt_modify, dt_access, ref all.count_setted_file_count, ref all.count_setted_folder_count, ref all.count_setted_filefolder_count);
+                        lop.FileORFolderHandleOver(path, true);
                     }
+                    //如果是文件夹
+                    else if (file_type == OverAllData.FILETYPE_FOLDER)
+                    {
+                        //获取该目录下的所有文件/文件夹
+                        faff.GetFileFolderListFromFolder(path, all.list_all_filefolder);
+                        //翻转链表
+                        all.list_all_filefolder.Reverse();
+                        //遍历链表，逐个修改
+                        foreach(FileFolderInfoNode ffin in all.list_all_filefolder)
+                        {
+                            //是文件类型
+                            if (ffin.type == OverAllData.FILETYPE_FILE)
+                                faff.SetFileORFolderTime(ffin.file_info.FullName, OverAllData.FILETYPE_FILE, dt_create, dt_modify, dt_access, ref all.count_setted_file_count, ref all.count_setted_folder_count, ref all.count_setted_filefolder_count);
+                            //是文件夹类型
+                            else if (ffin.type == OverAllData.FILETYPE_FOLDER)
+                                faff.SetFileORFolderTime(ffin.folder_info.FullName, OverAllData.FILETYPE_FOLDER, dt_create, dt_modify, dt_access, ref all.count_setted_file_count, ref all.count_setted_folder_count, ref all.count_setted_filefolder_count);
+                        }
+                        lop.FileORFolderHandleOver(path, true);
+                    }
+                    //更新统计窗口的信息
+                    uir.RefreshCountInfo(listView_countinfo, true);
                 }
-                //如果是文件夹
-                else if(file_type==OverAllData.FILETYPE_FOLDER)
+            }
+            //默认设置
+            else
+            {
+                foreach (string path in all.listview_file_list)
                 {
-                    //默认设置
-                    //统一设置
+                    //重置存储数据的链表
+                    all.list_all_filefolder.Clear();
+                    all.list_all_folder.Clear();
+                    //输出信息
+                    lop.CheckFileAndFolder(path);
+                    //检查这个路径是文件还是文件夹
+                    int file_type = faff.CheckIfFileOrFolder(path);
+                    //如果是文件夹
+                    if (file_type == OverAllData.FILETYPE_FOLDER)
+                    {
 
-                }
-                //如果路径不存在
-                else
-                {
-                    lop.PathIsNull(path);
+
+                        lop.FileORFolderHandleOver(path, true);
+                    }
+                    //如果是文件
+                    else if (file_type == OverAllData.FILETYPE_FILE)
+                    {
+                        //没什么需要做的
+                        //计数自增
+                        faff.SettedFileAndFolderNumSelfAdd(OverAllData.FILETYPE_FILE, ref all.count_setted_file_count, ref all.count_setted_folder_count, ref all.count_setted_filefolder_count);
+                        lop.FileORFolderHandleOver(path, true);
+                    }
+                    else
+                        lop.FileORFolderHandleOver(path, false);
+                    //更新统计窗口的信息
+                    uir.RefreshCountInfo(listView_countinfo, true);
                 }
             }
         }
