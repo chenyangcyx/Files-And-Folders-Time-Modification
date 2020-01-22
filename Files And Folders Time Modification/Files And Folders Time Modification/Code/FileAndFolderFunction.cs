@@ -10,6 +10,7 @@ namespace Files_And_Folders_Time_Modification.Code
     class FileAndFolderFunction
     {
         OverAllData all = OverAllData.alldata;
+        Utils utils = new Utils();
 
         //根据传入的路径判断是文件/文件夹
         public int CheckIfFileOrFolder(string path)
@@ -131,14 +132,13 @@ namespace Files_And_Folders_Time_Modification.Code
             }
         }
 
-        //获取一个文件夹下所有文件+文件夹和文件夹的链表
-        public void GetFileFolderAndFolderListFromFolder(string path, List<FileFolderInfoNode> all_filefolder, List<FileFolderInfoNode> all_folder)
+        //获取一个文件夹下所有文件夹的链表
+        public void GetFolderListFromFolder(string path, List<FileFolderInfoNode> all_folder)
         {
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
             FileFolderInfoNode temp = new FileFolderInfoNode();
             temp.type = OverAllData.FILETYPE_FOLDER;
             temp.folder_info = new DirectoryInfo(path);
-            all_filefolder.Add(temp);
             all_folder.Add(temp);
             temp_folder.Enqueue(temp);
             while (temp_folder.Count != 0)
@@ -149,17 +149,58 @@ namespace Files_And_Folders_Time_Modification.Code
                     FileFolderInfoNode fn_t = new FileFolderInfoNode();
                     fn_t.type = OverAllData.FILETYPE_FOLDER;
                     fn_t.folder_info = new DirectoryInfo(di.FullName);
-                    all_filefolder.Add(fn_t);
                     all_folder.Add(fn_t);
                     temp_folder.Enqueue(fn_t);
                 }
-                foreach (FileInfo fi in fn.folder_info.GetFiles())
+            }
+        }
+
+        //默认设置-更新链表中所有的文件和文件夹的时间
+        //规则：
+        //1、对于单个文件：
+        //    如果创建时间晚于修改时间，则修改创建时间=修改时间，访问时间=修改时间
+        //2、对于文件夹：
+        //    创建时间=最早创建时间（子文件+子文件夹），修改时间=最晚修改时间（子文件+子文件夹）
+        //    如果为空，则时间不变
+        //3、设置文件夹的访问时间=修改时间
+        public void RefreshTimeInFileFolderListWithDefaultSetting(List<FileFolderInfoNode> all_folder,
+            ref int count_setted_file_count, ref int count_setted_folder_count, ref int count_setted_filefolder_count)
+        {
+            foreach (FileFolderInfoNode ffi in all_folder)
+            {
+                //记录所有文件+文件夹的链表
+                List<DateTime> all_time = new List<DateTime>();
+                //获取文件夹节点
+                DirectoryInfo di = ffi.folder_info;
+                //对于其中的所有文件
+                foreach (FileInfo fi_in in di.GetFiles())
                 {
-                    FileFolderInfoNode fn_t = new FileFolderInfoNode();
-                    fn_t.type = OverAllData.FILETYPE_FILE;
-                    fn_t.file_info = new FileInfo(fi.FullName);
-                    all_filefolder.Add(fn_t);
+                    all_time.Add(fi_in.LastWriteTime);
+                    DateTime file_create = fi_in.CreationTime;
+                    DateTime file_modify = fi_in.LastWriteTime;
+                    if (DateTime.Compare(file_create, file_modify) > 0)
+                        fi_in.CreationTime = file_modify;
+                    fi_in.LastAccessTime = file_modify;
+
+                    SettedFileAndFolderNumSelfAdd(OverAllData.FILETYPE_FILE, ref count_setted_file_count, ref count_setted_folder_count, ref count_setted_filefolder_count);
                 }
+                //对于该文件夹，获取最早的创建时间，最晚的修改时间
+                if (!(di.GetFiles().Length == 0 && di.GetDirectories().Length == 0))
+                {
+                    //获取最早的创建时间
+                    foreach (DirectoryInfo di_in in di.GetDirectories())
+                        all_time.Add(di_in.LastWriteTime);
+                    DateTime most_early = utils.GetMostEarlyTimeFromList(all_time);
+                    //获取最晚的修改时间
+                    DateTime most_late = utils.GetMostLateTimeFromList(all_time);
+                    //修改创建时间=最早时间
+                    di.CreationTime = most_early;
+                    //修改修改时间=最晚时间
+                    di.LastWriteTime = most_late;
+                    //修改访问时间=修改时间
+                    di.LastAccessTime = di.LastWriteTime;
+                }
+                SettedFileAndFolderNumSelfAdd(OverAllData.FILETYPE_FOLDER, ref count_setted_file_count, ref count_setted_folder_count, ref count_setted_filefolder_count);
             }
         }
     }

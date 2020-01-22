@@ -266,8 +266,12 @@ namespace Files_And_Folders_Time_Modification
                     //如果是文件夹
                     if (file_type == OverAllData.FILETYPE_FOLDER)
                     {
-
-
+                        //获取该目录下的所有文件夹
+                        faff.GetFolderListFromFolder(path, all.list_all_folder);
+                        //翻转链表
+                        all.list_all_folder.Reverse();
+                        //开始修改文件夹
+                        faff.RefreshTimeInFileFolderListWithDefaultSetting(all.list_all_folder, ref all.count_setted_file_count, ref all.count_setted_folder_count, ref all.count_setted_filefolder_count);
                         lop.FileORFolderHandleOver(path, true);
                     }
                     //如果是文件

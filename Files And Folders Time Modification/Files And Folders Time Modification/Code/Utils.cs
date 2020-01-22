@@ -62,5 +62,29 @@ namespace Files_And_Folders_Time_Modification.Code
             minute = int.Parse(time_str[1]);
             second = int.Parse(time_str[2]);
         }
+
+        //从一个DateTime链表中获取最小的时间
+        public DateTime GetMostEarlyTimeFromList(List<DateTime> all_time)
+        {
+            DateTime result = all_time[0];
+            foreach(DateTime dt in all_time)
+            {
+                if (DateTime.Compare(result, dt) > 0)
+                    result = dt;
+            }
+            return result;
+        }
+
+        //从一个DateTime链表中获取最晚的时间
+        public DateTime GetMostLateTimeFromList(List<DateTime> all_time)
+        {
+            DateTime result = all_time[0];
+            foreach(DateTime dt in all_time)
+            {
+                if (DateTime.Compare(result, dt) < 0)
+                    result = dt;
+            }
+            return result;
+        }
     }
 }
