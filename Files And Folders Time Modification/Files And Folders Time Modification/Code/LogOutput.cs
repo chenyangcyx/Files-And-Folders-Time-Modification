@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Files_And_Folders_Time_Modification.Code
@@ -83,7 +79,7 @@ namespace Files_And_Folders_Time_Modification.Code
         }
 
         //文件、文件夹处理完成
-        public void FileORFolderHandleOver(string name,bool result)
+        public void FileORFolderHandleOver(string name, bool result)
         {
             if (result)
                 box.AppendText(name + " 处理成功！" + Environment.NewLine);

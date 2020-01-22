@@ -1,13 +1,6 @@
 ﻿using Files_And_Folders_Time_Modification.Code;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Files_And_Folders_Time_Modification
@@ -119,7 +112,7 @@ namespace Files_And_Folders_Time_Modification
         //ListView_folder拖入后操作
         private void listView_folder_DragDrop(object sender, DragEventArgs e)
         {
-            foreach(object ob in (Array)e.Data.GetData(DataFormats.FileDrop))
+            foreach (object ob in (Array)e.Data.GetData(DataFormats.FileDrop))
             {
                 all.listview_file_list.Add(ob.ToString());
                 lop.AddFileAndFolder(ob.ToString());
@@ -176,7 +169,7 @@ namespace Files_And_Folders_Time_Modification
             }
             //检查设置
             lop.StartSettingCheck("设置内容，");
-            int     year_create = 0, month_create = 0, day_create = 0, hour_create = 0, minute_create = 0, second_create = 0,
+            int year_create = 0, month_create = 0, day_create = 0, hour_create = 0, minute_create = 0, second_create = 0,
                     year_modify = 0, month_modify = 0, day_modify = 0, hour_modify = 0, minute_modify = 0, second_modify = 0,
                     year_access = 0, month_access = 0, day_access = 0, hour_access = 0, minute_access = 0, second_access = 0;
             if (radioButton_default_setting.Checked)
@@ -236,7 +229,7 @@ namespace Files_And_Folders_Time_Modification
                         //翻转链表
                         all.list_all_filefolder.Reverse();
                         //遍历链表，逐个修改
-                        foreach(FileFolderInfoNode ffin in all.list_all_filefolder)
+                        foreach (FileFolderInfoNode ffin in all.list_all_filefolder)
                         {
                             //是文件类型
                             if (ffin.type == OverAllData.FILETYPE_FILE)

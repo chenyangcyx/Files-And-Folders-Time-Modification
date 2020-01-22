@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Files_And_Folders_Time_Modification.Code
 {
@@ -44,7 +41,7 @@ namespace Files_And_Folders_Time_Modification.Code
         }
 
         //统计一个文件夹中的所有子文件及子文件夹数量
-        public void CountAllFileAndFolderNum(string path,out int file_num, out int folder_num)
+        public void CountAllFileAndFolderNum(string path, out int file_num, out int folder_num)
         {
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
             FileFolderInfoNode temp = new FileFolderInfoNode();
@@ -103,7 +100,7 @@ namespace Files_And_Folders_Time_Modification.Code
         }
 
         //获取某一个文件夹下所有文件的链表
-        public void GetFileFolderListFromFolder(string path,List<FileFolderInfoNode> all_filefolder)
+        public void GetFileFolderListFromFolder(string path, List<FileFolderInfoNode> all_filefolder)
         {
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
             FileFolderInfoNode temp = new FileFolderInfoNode();

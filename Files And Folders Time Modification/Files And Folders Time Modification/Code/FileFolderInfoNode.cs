@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Files_And_Folders_Time_Modification.Code
 {
@@ -25,14 +20,14 @@ namespace Files_And_Folders_Time_Modification.Code
             folder_info = null;
         }
 
-        public FileFolderInfoNode(int type,FileInfo fi)
+        public FileFolderInfoNode(int type, FileInfo fi)
         {
             this.type = type;
             this.file_info = fi;
             this.folder_info = null;
         }
 
-        public FileFolderInfoNode(int type,DirectoryInfo di)
+        public FileFolderInfoNode(int type, DirectoryInfo di)
         {
             this.type = type;
             this.folder_info = di;

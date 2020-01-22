@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Files_And_Folders_Time_Modification.Code
@@ -20,17 +16,17 @@ namespace Files_And_Folders_Time_Modification.Code
         }
 
         //根据List列表的项目更新listView_folder的内容
-        public void RefreshFileListView(ListView lv,List<string> list)
+        public void RefreshFileListView(ListView lv, List<string> list)
         {
             lv.BeginUpdate();
             lv.Clear();
             AddFileListViewTitle(lv);
             int i = 1;
-            foreach(string str in list)
+            foreach (string str in list)
             {
                 ListViewItem it = new ListViewItem();
                 it.Text = "" + (i++);
-                if(!string.IsNullOrEmpty(System.IO.Path.GetFileName(str)))
+                if (!string.IsNullOrEmpty(System.IO.Path.GetFileName(str)))
                     it.SubItems.Add(System.IO.Path.GetFileName(str));
                 else
                     it.SubItems.Add(str);
@@ -49,7 +45,7 @@ namespace Files_And_Folders_Time_Modification.Code
         }
 
         //更新listView_countinfo的内容
-        public void RefreshCountInfo(ListView lv,bool if_ok)
+        public void RefreshCountInfo(ListView lv, bool if_ok)
         {
             lv.BeginUpdate();
             lv.Clear();
@@ -57,7 +53,7 @@ namespace Files_And_Folders_Time_Modification.Code
             //文件及文件夹 数量
             ListViewItem it1 = new ListViewItem();
             it1.Text = OverAllData.LISTVIEW_COUNTINFO_INFO1_STRING;
-            it1.SubItems.Add(""+all.count_all_filefolder_count);
+            it1.SubItems.Add("" + all.count_all_filefolder_count);
             ListViewItem it1_1 = new ListViewItem();
             it1_1.Text = OverAllData.LISTVIEW_COUNTINFO_INFO1_FILENUM_STRING;
             it1_1.SubItems.Add("" + all.count_all_file_count);
@@ -87,7 +83,7 @@ namespace Files_And_Folders_Time_Modification.Code
             //已完成设置 数量
             ListViewItem it2 = new ListViewItem();
             it2.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_STRING;
-            it2.SubItems.Add(""+all.count_setted_filefolder_count);
+            it2.SubItems.Add("" + all.count_setted_filefolder_count);
             ListViewItem it2_1 = new ListViewItem();
             it2_1.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_FILENUM_STRING;
             it2_1.SubItems.Add("" + all.count_setted_file_count);
@@ -98,7 +94,7 @@ namespace Files_And_Folders_Time_Modification.Code
             it2_3.Text = OverAllData.LISTVIEW_COUNTINFO_INFO2_FILEANDFOLDERNUM_STRING;
             it2_3.SubItems.Add("" + all.count_setted_filefolder_count);
             //检查是否完成设置
-            if (all.count_setted_filefolder_count == all.count_all_filefolder_count&&all.count_all_filefolder_count!=0)
+            if (all.count_setted_filefolder_count == all.count_all_filefolder_count && all.count_all_filefolder_count != 0)
             {
                 it2.SubItems.Add("√");
                 it2_1.SubItems.Add("√");

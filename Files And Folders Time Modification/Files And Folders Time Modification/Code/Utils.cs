@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Files_And_Folders_Time_Modification.Code
 {
@@ -49,7 +46,7 @@ namespace Files_And_Folders_Time_Modification.Code
         }
 
         //从字符串中获取年、月、日、小时、分钟、秒钟
-        public void GetDateTimeValueFromString(string str,out int year,out int month,out int day,out int hour,out int minute,out int second)
+        public void GetDateTimeValueFromString(string str, out int year, out int month, out int day, out int hour, out int minute, out int second)
         {
             string[] str_split = str.Split(" ".ToCharArray());
             string[] date_str = str_split[0].Split("/".ToCharArray());
@@ -67,7 +64,7 @@ namespace Files_And_Folders_Time_Modification.Code
         public DateTime GetMostEarlyTimeFromList(List<DateTime> all_time)
         {
             DateTime result = all_time[0];
-            foreach(DateTime dt in all_time)
+            foreach (DateTime dt in all_time)
             {
                 if (DateTime.Compare(result, dt) > 0)
                     result = dt;
@@ -79,7 +76,7 @@ namespace Files_And_Folders_Time_Modification.Code
         public DateTime GetMostLateTimeFromList(List<DateTime> all_time)
         {
             DateTime result = all_time[0];
-            foreach(DateTime dt in all_time)
+            foreach (DateTime dt in all_time)
             {
                 if (DateTime.Compare(result, dt) < 0)
                     result = dt;
