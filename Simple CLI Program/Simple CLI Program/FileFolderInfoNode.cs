@@ -1,6 +1,6 @@
-using System.IO;
+﻿using System.IO;
 
-namespace Files_And_Folders_Time_Modification.Code
+namespace Simple_CLI_Program
 {
     class FileFolderInfoNode
     {
