@@ -33,13 +33,13 @@ namespace Files_And_Folders_Time_Modification.Code
             //获取时间
             string[] time_str = str[1].Split(":".ToCharArray());
             //检查小时
-            if (int.Parse(time_str[0]) > 24 || int.Parse(time_str[0]) < 1)
+            if (int.Parse(time_str[0]) > 23 || int.Parse(time_str[0]) < 0)
                 return false;
             //检查分钟
-            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 1)
+            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 0)
                 return false;
             //检查秒钟
-            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 1)
+            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 0)
                 return false;
 
             return true;
