@@ -312,7 +312,5 @@ namespace Simple_CLI_Program
                     ChangeOneFolderTimeNoSettingWithTraversal(node.folder_info);
             }
         }
-
-        //
     }
 }
