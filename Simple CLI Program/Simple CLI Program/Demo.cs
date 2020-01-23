@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Simple_CLI_Program
 {
@@ -346,6 +347,20 @@ namespace Simple_CLI_Program
             //all_node.Add(new FileFolderInfoNode(OverAllData.FILETYPE_FOLDER, new DirectoryInfo(folder_path4)));
             //all_node.Add(new FileFolderInfoNode(OverAllData.FILETYPE_FOLDER, new DirectoryInfo(folder_path5)));
             //faff.ChangeListTimeNoSettingWithTraversal(all_node);
+        }
+
+        //示例9，特殊示例
+        public void demo9()
+        {
+            SpecialNeed sn = new SpecialNeed();
+            //要修改的文件路径
+            string path = "D:\\test_folder";
+
+            //调用函数-方式1
+            sn.ChangeFolderTimeWithSpecialNeed(path);
+            //调用函数-方式2
+            //DirectoryInfo di = new DirectoryInfo(path);
+            //sn.ChangeFolderTimeWithSpecialNeed(di);
         }
     }
 }

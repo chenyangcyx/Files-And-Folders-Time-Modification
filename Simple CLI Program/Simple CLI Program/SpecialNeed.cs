@@ -12,12 +12,12 @@ namespace Simple_CLI_Program
         //修改文件夹中的所有子文件和文件夹的时间
         //规则：
         //1、对于单个文件：
-        //    创建时间：若早于'参考基准时间'，则不修改；否则修改，使其为修改时间
-        //    访问时间：later(创建时间，修改时间)
+        //  创建时间：若早于'参考基准时间'，则不修改；否则修改，使其为修改时间
+        //  访问时间：later(创建时间，修改时间)
         //2、对于文件夹：
-        //    创建时间：若早于'参考基准时间'，则不修改；否则修改为：earlier(所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间)
-        //    修改时间：若早于'参考基准时间'，则不修改；否则修改为：later(所有文件修改时间 + 所有文件夹修改时间)
-        //    访问时间：若早于'参考基准时间'，则不修改；否则修改为：later(创建时间，修改时间)
+        //  创建时间：若早于'参考基准时间'，则不修改；否则将[earlier(所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间)] 与其自身原有的创建时间比较，取较早的那个
+        //  修改时间：若早于'参考基准时间'，则不修改；否则将[later(所有文件修改时间 + 所有文件夹修改时间)] 与其自身原有的创建时间比较，取较早的那个
+        //  访问时间：若早于'参考基准时间'，则不修改；否则修改为：later(创建时间，修改时间)
         public void ChangeFolderTimeWithSpecialNeed(string path)
         {
             //转换基准时间
@@ -83,6 +83,10 @@ namespace Simple_CLI_Program
                             list_temp2.Add(di_in.CreationTime);
                             list_temp2.Add(di_in.LastWriteTime);
                         }
+                        DateTime dt2 = utils.GetMostEarlyTimeFromList(list_temp2);
+                        list_temp2.Clear();
+                        list_temp2.Add(di.CreationTime);
+                        list_temp2.Add(dt2);
                         di.CreationTime = utils.GetMostEarlyTimeFromList(list_temp2);
                     }
                     //设置修改时间
@@ -94,7 +98,11 @@ namespace Simple_CLI_Program
                             list_temp3.Add(fi_in.LastWriteTime);
                         foreach (DirectoryInfo di_in in di.GetDirectories())
                             list_temp3.Add(di_in.LastWriteTime);
-                        di.LastWriteTime = utils.GetMostLateTimeFromList(list_temp3);
+                        DateTime dt3 = utils.GetMostLateTimeFromList(list_temp3);
+                        list_temp3.Clear();
+                        list_temp3.Add(di.LastWriteTime);
+                        list_temp3.Add(dt3);
+                        di.LastWriteTime = utils.GetMostEarlyTimeFromList(list_temp3);
                     }
                     //设置访问时间
                     if (DateTime.Compare(di.LastAccessTime, reference_time) > 0)
