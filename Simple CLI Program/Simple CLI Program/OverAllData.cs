@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Simple_CLI_Program
+﻿namespace Simple_CLI_Program
 {
     class OverAllData
     {
@@ -10,6 +8,6 @@ namespace Simple_CLI_Program
         public const int FILETYPE_FILE = 1;
         public const int FILETYPE_FOLDER = 2;
         //时间参考基准
-        public DateTime reference_time = new DateTime(0);
+        public string reference_time = "2016/09/05 00:00:00";
     }
 }

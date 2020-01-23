@@ -201,6 +201,7 @@ namespace Simple_CLI_Program
                     di.LastAccessTime = di.LastWriteTime;
                 }
             }
+            Console.WriteLine("文件夹" + path + "时间修改成功！（默认设置+遍历）");
         }
 
         //修改单个文件夹的时间（默认+遍历）（传入DirectoryInfo）
@@ -268,6 +269,7 @@ namespace Simple_CLI_Program
                     di.LastAccessTime = di.LastWriteTime;
                 }
             }
+            Console.WriteLine("文件夹" + directoryInfo.FullName + "时间修改成功！（默认设置+遍历）");
         }
 
         //修改列表中的所有项目的时间（指定+文件夹不遍历）（传入path）
@@ -283,7 +285,7 @@ namespace Simple_CLI_Program
             }
         }
 
-        //修改列表中的所有项目的时间（指定+文件夹遍历）（传入FileFolderInfoNode）
+        //修改列表中的所有项目的时间（指定+文件夹不遍历）（传入FileFolderInfoNode）
         public void ChangeListTimeWithSettingNoTraversal(List<FileFolderInfoNode> all_node, DateTime create, DateTime modify, DateTime access)
         {
             foreach (FileFolderInfoNode node in all_node)
@@ -296,14 +298,56 @@ namespace Simple_CLI_Program
             }
         }
 
+        //修改列表中的所有项目的时间（指定+文件夹遍历）（传入path）
+        public void ChangeListTimeWithSettingWithTraversal(List<string> all_path, DateTime create, DateTime modify, DateTime access)
+        {
+            foreach (string path in all_path)
+            {
+                int type = utils.CheckIfFileOrFolder(path);
+                if (type == OverAllData.FILETYPE_FILE)
+                    ChangeOneFileTime(path, create, modify, access);
+                else if (type == OverAllData.FILETYPE_FOLDER)
+                    ChangeOneFolderTimeWithSettingWithTraversal(path, create, modify, access);
+            }
+        }
+
+        //修改列表中的所有项目的时间（指定+文件夹遍历）（传入FileFolderInfoNode）
+        public void ChangeListTimeWithSettingWithTraversal(List<FileFolderInfoNode> all_node, DateTime create, DateTime modify, DateTime access)
+        {
+            foreach (FileFolderInfoNode node in all_node)
+            {
+                int type = node.type;
+                if (type == OverAllData.FILETYPE_FILE)
+                    ChangeOneFileTime(node.file_info, create, modify, access);
+                else if (type == OverAllData.FILETYPE_FOLDER)
+                    ChangeOneFolderTimeWithSettingWithTraversal(node.folder_info, create, modify, access);
+            }
+        }
+
         //修改列表中的所有项目的时间（默认+文件夹不遍历）（传入path）
         public void ChangeListTimeNoSettingNoTraversal(List<string> all_path)
         {
             Console.WriteLine("在默认方式+文件夹不遍历方式下，没什么可以做的！");
         }
 
-        //修改列表中的所有项目的时间（默认+文件夹遍历）（传入FileFolderInfoNode）
+        //修改列表中的所有项目的时间（默认+文件夹不遍历）（传入FileFolderInfoNode）
         public void ChangeListTimeNoSettingNoTraversal(List<FileFolderInfoNode> all_node)
+        {
+            Console.WriteLine("在默认方式+文件夹不遍历方式下，没什么可以做的！");
+        }
+
+        //修改列表中的所有项目的时间（默认+文件夹遍历）（传入path）
+        public void ChangeListTimeNoSettingWithTraversal(List<string> all_path)
+        {
+            foreach (string path in all_path)
+            {
+                if (utils.CheckIfFileOrFolder(path) == OverAllData.FILETYPE_FOLDER)
+                    ChangeOneFolderTimeNoSettingWithTraversal(new DirectoryInfo(path));
+            }
+        }
+
+        //修改列表中的所有项目的时间（默认+文件夹遍历）（传入FileFolderInfoNode）
+        public void ChangeListTimeNoSettingWithTraversal(List<FileFolderInfoNode> all_node)
         {
             foreach (FileFolderInfoNode node in all_node)
             {

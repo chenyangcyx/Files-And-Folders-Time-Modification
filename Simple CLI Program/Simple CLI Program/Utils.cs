@@ -34,31 +34,33 @@ namespace Simple_CLI_Program
             //获取时间
             string[] time_str = str[1].Split(":".ToCharArray());
             //检查小时
-            if (int.Parse(time_str[0]) > 24 || int.Parse(time_str[0]) < 1)
+            if (int.Parse(time_str[0]) > 23 || int.Parse(time_str[0]) < 0)
                 return false;
             //检查分钟
-            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 1)
+            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 0)
                 return false;
             //检查秒钟
-            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 1)
+            if (int.Parse(time_str[0]) > 59 || int.Parse(time_str[0]) < 0)
                 return false;
 
             return true;
         }
 
-        //从字符串中获取年、月、日、小时、分钟、秒钟
-        public void GetDateTimeValueFromString(string str, out int year, out int month, out int day, out int hour, out int minute, out int second)
+        //从字符串中获取时间的返回值
+        public DateTime GetDateTimeFromString(string str)
         {
             string[] str_split = str.Split(" ".ToCharArray());
             string[] date_str = str_split[0].Split("/".ToCharArray());
             string[] time_str = str_split[1].Split(":".ToCharArray());
 
-            year = int.Parse(date_str[0]);
-            month = int.Parse(date_str[1]);
-            day = int.Parse(date_str[2]);
-            hour = int.Parse(time_str[0]);
-            minute = int.Parse(time_str[1]);
-            second = int.Parse(time_str[2]);
+            int year = int.Parse(date_str[0]);
+            int month = int.Parse(date_str[1]);
+            int day = int.Parse(date_str[2]);
+            int hour = int.Parse(time_str[0]);
+            int minute = int.Parse(time_str[1]);
+            int second = int.Parse(time_str[2]);
+
+            return new DateTime(year, month, day, hour, minute, second, DateTimeKind.Local);
         }
 
         //从一个DateTime链表中获取最小的时间
