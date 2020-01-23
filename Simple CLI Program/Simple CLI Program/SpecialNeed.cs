@@ -12,8 +12,8 @@ namespace Simple_CLI_Program
         //修改文件夹中的所有子文件和文件夹的时间
         //规则：
         //1、对于单个文件：
-        //  创建时间：若早于'参考基准时间'，则不修改；否则修改，使其为修改时间
-        //  访问时间：later(创建时间，修改时间)
+        //  创建时间：若早于'参考基准时间'，则不修改；否则修改为earlier(原有创建时间，修改时间)
+        //  访问时间：earlier(原有访问时间，later(创建时间，修改时间))
         //2、对于文件夹：
         //  创建时间：若早于'参考基准时间'，则不修改；否则将[earlier(所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间)] 与其自身原有的创建时间比较，取较早的那个
         //  修改时间：若早于'参考基准时间'，则不修改；否则将[later(所有文件修改时间 + 所有文件夹修改时间)] 与其自身原有的创建时间比较，取较早的那个
@@ -56,14 +56,23 @@ namespace Simple_CLI_Program
                 //对于其中的所有文件
                 foreach (FileInfo fi_in in di.GetFiles())
                 {
-                    //检查创建时间
-                    if (DateTime.Compare(fi_in.CreationTime, reference_time) > 0)
-                        fi_in.CreationTime = fi_in.LastWriteTime;
-                    //设置访问时间
                     List<DateTime> list_temp1 = new List<DateTime>();
+                    //设置创建时间
+                    if (DateTime.Compare(fi_in.CreationTime, reference_time) > 0)
+                    {
+                        list_temp1.Add(fi_in.CreationTime);
+                        list_temp1.Add(fi_in.LastWriteTime);
+                        fi_in.CreationTime = utils.GetMostEarlyTimeFromList(list_temp1);
+                    }
+                    //设置访问时间
+                    list_temp1.Clear();
                     list_temp1.Add(fi_in.CreationTime);
                     list_temp1.Add(fi_in.LastWriteTime);
-                    fi_in.LastAccessTime = utils.GetMostLateTimeFromList(list_temp1);
+                    DateTime dt1 = utils.GetMostLateTimeFromList(list_temp1);
+                    list_temp1.Clear();
+                    list_temp1.Add(fi_in.LastAccessTime);
+                    list_temp1.Add(dt1);
+                    fi_in.LastAccessTime = utils.GetMostEarlyTimeFromList(list_temp1);
                 }
                 //设置该文件夹的信息
                 if (!(di.GetFiles().Length == 0 && di.GetDirectories().Length == 0))
@@ -155,14 +164,23 @@ namespace Simple_CLI_Program
                 //对于其中的所有文件
                 foreach (FileInfo fi_in in di.GetFiles())
                 {
-                    //检查创建时间
-                    if (DateTime.Compare(fi_in.CreationTime, reference_time) > 0)
-                        fi_in.CreationTime = fi_in.LastWriteTime;
-                    //设置访问时间
                     List<DateTime> list_temp1 = new List<DateTime>();
+                    //设置创建时间
+                    if (DateTime.Compare(fi_in.CreationTime, reference_time) > 0)
+                    {
+                        list_temp1.Add(fi_in.CreationTime);
+                        list_temp1.Add(fi_in.LastWriteTime);
+                        fi_in.CreationTime = utils.GetMostEarlyTimeFromList(list_temp1);
+                    }
+                    //设置访问时间
+                    list_temp1.Clear();
                     list_temp1.Add(fi_in.CreationTime);
                     list_temp1.Add(fi_in.LastWriteTime);
-                    fi_in.LastAccessTime = utils.GetMostLateTimeFromList(list_temp1);
+                    DateTime dt1 = utils.GetMostLateTimeFromList(list_temp1);
+                    list_temp1.Clear();
+                    list_temp1.Add(fi_in.LastAccessTime);
+                    list_temp1.Add(dt1);
+                    fi_in.LastAccessTime = utils.GetMostEarlyTimeFromList(list_temp1);
                 }
                 //设置该文件夹的信息
                 if (!(di.GetFiles().Length == 0 && di.GetDirectories().Length == 0))
@@ -182,6 +200,10 @@ namespace Simple_CLI_Program
                             list_temp2.Add(di_in.CreationTime);
                             list_temp2.Add(di_in.LastWriteTime);
                         }
+                        DateTime dt2 = utils.GetMostEarlyTimeFromList(list_temp2);
+                        list_temp2.Clear();
+                        list_temp2.Add(di.CreationTime);
+                        list_temp2.Add(dt2);
                         di.CreationTime = utils.GetMostEarlyTimeFromList(list_temp2);
                     }
                     //设置修改时间
@@ -193,7 +215,11 @@ namespace Simple_CLI_Program
                             list_temp3.Add(fi_in.LastWriteTime);
                         foreach (DirectoryInfo di_in in di.GetDirectories())
                             list_temp3.Add(di_in.LastWriteTime);
-                        di.LastWriteTime = utils.GetMostLateTimeFromList(list_temp3);
+                        DateTime dt3 = utils.GetMostLateTimeFromList(list_temp3);
+                        list_temp3.Clear();
+                        list_temp3.Add(di.LastWriteTime);
+                        list_temp3.Add(dt3);
+                        di.LastWriteTime = utils.GetMostEarlyTimeFromList(list_temp3);
                     }
                     //设置访问时间
                     if (DateTime.Compare(di.LastAccessTime, reference_time) > 0)
