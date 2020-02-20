@@ -8,6 +8,20 @@ namespace Simple_CLI_Program
     {
         Utils utils = new Utils();
 
+        //获取文件的属性（传入path）
+        public void GetFileArrtibutes(string path)
+        {
+            FileInfo fi = new FileInfo(path);
+            if ((fi.Attributes & FileAttributes.Normal) != 0)
+                Console.WriteLine("正常文件！");
+            if ((fi.Attributes & FileAttributes.Hidden) != 0)
+                Console.WriteLine("隐藏文件！");
+            if ((fi.Attributes & FileAttributes.ReadOnly) != 0)
+                Console.WriteLine("只读文件！");
+            if ((fi.Attributes & FileAttributes.Directory) != 0)
+                Console.WriteLine("是一个文件夹！");
+        }
+
         //修改单个文件的时间（传入path）
         public void ChangeOneFileTime(string path, DateTime create, DateTime modify, DateTime access)
         {

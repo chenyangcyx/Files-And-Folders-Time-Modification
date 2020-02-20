@@ -16,17 +16,17 @@ namespace Simple_CLI_Program
         //  访问时间：earlier(原有访问时间，later(创建时间，修改时间))
         //2、对于文件夹：
         //  创建时间：若早于'参考基准时间'，则不修改；否则将[earlier(所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间)] 与其自身原有的创建时间比较，取较早的那个
-        //  修改时间：若早于'参考基准时间'，则不修改；否则将[later(所有文件修改时间 + 所有文件夹修改时间)] 与其自身原有的创建时间比较，取较早的那个
+        //  修改时间：若早于'参考基准时间'，则不修改；否则将[later(所有文件修改时间 + 所有文件夹修改时间)] 与其自身原有的修改时间比较，取较早的那个
         //  访问时间：若早于'参考基准时间'，则不修改；否则修改为：later(创建时间，修改时间)
-        public void ChangeFolderTimeWithSpecialNeed(string path)
+        public void ChangeFolderTimeWithSpecialNeed(string path, string refertime)
         {
             //转换基准时间
-            if (!utils.CheckTimeString(OverAllData.alldata.reference_time))
+            if (!utils.CheckTimeString(refertime))
             {
                 Console.WriteLine("基准时间格式设置错误！");
                 return;
             }
-            DateTime reference_time = utils.GetDateTimeFromString(all.reference_time);
+            DateTime reference_time = utils.GetDateTimeFromString(refertime);
             //获取所有文件夹的列表
             List<FileFolderInfoNode> all_folder = new List<FileFolderInfoNode>();
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
@@ -56,8 +56,11 @@ namespace Simple_CLI_Program
                 //对于其中的所有文件
                 foreach (FileInfo fi_in in di.GetFiles())
                 {
-                    List<DateTime> list_temp1 = new List<DateTime>();
+                    //删除只读属性
+                    FileAttributes origin_attr = fi_in.Attributes;
+                    fi_in.Attributes = origin_attr & (~FileAttributes.ReadOnly);
                     //设置创建时间
+                    List<DateTime> list_temp1 = new List<DateTime>();
                     if (DateTime.Compare(fi_in.CreationTime, reference_time) > 0)
                     {
                         list_temp1.Add(fi_in.CreationTime);
@@ -73,10 +76,15 @@ namespace Simple_CLI_Program
                     list_temp1.Add(fi_in.LastAccessTime);
                     list_temp1.Add(dt1);
                     fi_in.LastAccessTime = utils.GetMostEarlyTimeFromList(list_temp1);
+                    //还原原有属性
+                    fi_in.Attributes = origin_attr;
                 }
                 //设置该文件夹的信息
                 if (!(di.GetFiles().Length == 0 && di.GetDirectories().Length == 0))
                 {
+                    //去除只读属性
+                    FileAttributes origin_attr = di.Attributes;
+                    di.Attributes = origin_attr & (~FileAttributes.ReadOnly);
                     //设置创建时间
                     if (DateTime.Compare(di.CreationTime, reference_time) > 0)
                     {
@@ -121,20 +129,22 @@ namespace Simple_CLI_Program
                         list_temp4.Add(di.LastWriteTime);
                         di.LastAccessTime = utils.GetMostLateTimeFromList(list_temp4);
                     }
+                    //还原原有属性
+                    di.Attributes = origin_attr;
                 }
             }
             Console.WriteLine("文件夹：" + path + "设置成功！");
         }
 
-        public void ChangeFolderTimeWithSpecialNeed(DirectoryInfo directoryInfo)
+        public void ChangeFolderTimeWithSpecialNeed(DirectoryInfo directoryInfo, string refertime)
         {
             //转换基准时间
-            if (!utils.CheckTimeString(OverAllData.alldata.reference_time))
+            if (!utils.CheckTimeString(refertime))
             {
                 Console.WriteLine("基准时间格式设置错误！");
                 return;
             }
-            DateTime reference_time = utils.GetDateTimeFromString(all.reference_time);
+            DateTime reference_time = utils.GetDateTimeFromString(refertime);
             //获取所有文件夹的列表
             List<FileFolderInfoNode> all_folder = new List<FileFolderInfoNode>();
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
@@ -164,8 +174,11 @@ namespace Simple_CLI_Program
                 //对于其中的所有文件
                 foreach (FileInfo fi_in in di.GetFiles())
                 {
-                    List<DateTime> list_temp1 = new List<DateTime>();
+                    //删除只读属性
+                    FileAttributes origin_attr = fi_in.Attributes;
+                    fi_in.Attributes = origin_attr & (~FileAttributes.ReadOnly);
                     //设置创建时间
+                    List<DateTime> list_temp1 = new List<DateTime>();
                     if (DateTime.Compare(fi_in.CreationTime, reference_time) > 0)
                     {
                         list_temp1.Add(fi_in.CreationTime);
@@ -181,10 +194,15 @@ namespace Simple_CLI_Program
                     list_temp1.Add(fi_in.LastAccessTime);
                     list_temp1.Add(dt1);
                     fi_in.LastAccessTime = utils.GetMostEarlyTimeFromList(list_temp1);
+                    //还原原有属性
+                    fi_in.Attributes = origin_attr;
                 }
                 //设置该文件夹的信息
                 if (!(di.GetFiles().Length == 0 && di.GetDirectories().Length == 0))
                 {
+                    //去除只读属性
+                    FileAttributes origin_attr = di.Attributes;
+                    di.Attributes = origin_attr & (~FileAttributes.ReadOnly);
                     //设置创建时间
                     if (DateTime.Compare(di.CreationTime, reference_time) > 0)
                     {
@@ -229,6 +247,8 @@ namespace Simple_CLI_Program
                         list_temp4.Add(di.LastWriteTime);
                         di.LastAccessTime = utils.GetMostLateTimeFromList(list_temp4);
                     }
+                    //还原原有属性
+                    di.Attributes = origin_attr;
                 }
             }
             Console.WriteLine("文件夹：" + directoryInfo.FullName + "设置成功！");

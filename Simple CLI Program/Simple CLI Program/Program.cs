@@ -1,4 +1,6 @@
-﻿namespace Simple_CLI_Program
+﻿using System.IO;
+
+namespace Simple_CLI_Program
 {
     class Program
     {
