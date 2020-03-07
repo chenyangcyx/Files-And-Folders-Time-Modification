@@ -87,6 +87,20 @@ namespace Simple_CLI_Program
             return result;
         }
 
+        //从一个DateTime链表中删除早于reference_time的时间
+        public List<DateTime> DeleteTimeEarlyThanReferenceTime(List<DateTime> all_time,DateTime not_early_than_this_time)
+        {
+            List<DateTime> new_list = new List<DateTime>();
+            foreach (DateTime dt in all_time)
+            {
+                if (DateTime.Compare(dt, not_early_than_this_time) > 0)
+                    new_list.Add(dt);
+            }
+            if (new_list.Count == 0)
+                new_list.Add(GetMostLateTimeFromList(all_time));
+            return new_list;
+        }
+
         //根据传入的路径判断是文件/文件夹
         public int CheckIfFileOrFolder(string path)
         {

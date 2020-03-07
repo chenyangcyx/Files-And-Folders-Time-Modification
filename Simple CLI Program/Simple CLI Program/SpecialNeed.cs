@@ -15,18 +15,19 @@ namespace Simple_CLI_Program
         //  创建时间：若早于'参考基准时间'，则不修改；否则修改为earlier(原有创建时间，修改时间)
         //  访问时间：earlier(原有访问时间，later(创建时间，修改时间))
         //2、对于文件夹：
-        //  创建时间：若早于'参考基准时间'，则不修改；否则将[earlier(所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间)] 与其自身原有的创建时间比较，取较早的那个
+        //  创建时间：若早于'参考基准时间'，则不修改；否则将[earlier(所有文件创建时间 + 所有文件夹创建时间 - 早于'参考基准时间2'的时间)] 与其自身原有的创建时间比较，取较早的那个
         //  修改时间：若早于'参考基准时间'，则不修改；否则将[later(所有文件修改时间 + 所有文件夹修改时间)] 与其自身原有的修改时间比较，取较早的那个
         //  访问时间：若早于'参考基准时间'，则不修改；否则修改为：later(创建时间，修改时间)
-        public void ChangeFolderTimeWithSpecialNeed(string path, string refertime)
+        public void ChangeFolderTimeWithSpecialNeed(string path, string refertime, string refertime2)
         {
             //转换基准时间
-            if (!utils.CheckTimeString(refertime))
+            if ((!utils.CheckTimeString(refertime)) || (!utils.CheckTimeString(refertime2)))
             {
                 Console.WriteLine("基准时间格式设置错误！");
                 return;
             }
             DateTime reference_time = utils.GetDateTimeFromString(refertime);
+            DateTime not_early_than_this_time = utils.GetDateTimeFromString(refertime2);
             //获取所有文件夹的列表
             List<FileFolderInfoNode> all_folder = new List<FileFolderInfoNode>();
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
@@ -88,18 +89,15 @@ namespace Simple_CLI_Program
                     //设置创建时间
                     if (DateTime.Compare(di.CreationTime, reference_time) > 0)
                     {
-                        //收集：所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间
+                        //收集：所有文件创建时间 + 所有文件夹创建时间
                         List<DateTime> list_temp2 = new List<DateTime>();
                         foreach (FileInfo fi_in in di.GetFiles())
-                        {
                             list_temp2.Add(fi_in.CreationTime);
-                            list_temp2.Add(fi_in.LastWriteTime);
-                        }
                         foreach (DirectoryInfo di_in in di.GetDirectories())
-                        {
                             list_temp2.Add(di_in.CreationTime);
-                            list_temp2.Add(di_in.LastWriteTime);
-                        }
+                        //从列表中删除早于'参考基准时间2'的时间
+                        list_temp2 = utils.DeleteTimeEarlyThanReferenceTime(list_temp2, not_early_than_this_time);
+                        //获取列表中最早的时间
                         DateTime dt2 = utils.GetMostEarlyTimeFromList(list_temp2);
                         list_temp2.Clear();
                         list_temp2.Add(di.CreationTime);
@@ -136,15 +134,16 @@ namespace Simple_CLI_Program
             Console.WriteLine("文件夹：" + path + "设置成功！");
         }
 
-        public void ChangeFolderTimeWithSpecialNeed(DirectoryInfo directoryInfo, string refertime)
+        public void ChangeFolderTimeWithSpecialNeed(DirectoryInfo directoryInfo, string refertime, string refertime2)
         {
             //转换基准时间
-            if (!utils.CheckTimeString(refertime))
+            if ((!utils.CheckTimeString(refertime)) || (!utils.CheckTimeString(refertime2)))
             {
                 Console.WriteLine("基准时间格式设置错误！");
                 return;
             }
             DateTime reference_time = utils.GetDateTimeFromString(refertime);
+            DateTime not_early_than_this_time = utils.GetDateTimeFromString(refertime2);
             //获取所有文件夹的列表
             List<FileFolderInfoNode> all_folder = new List<FileFolderInfoNode>();
             Queue<FileFolderInfoNode> temp_folder = new Queue<FileFolderInfoNode>();
@@ -206,18 +205,15 @@ namespace Simple_CLI_Program
                     //设置创建时间
                     if (DateTime.Compare(di.CreationTime, reference_time) > 0)
                     {
-                        //收集：所有文件创建时间、修改时间 + 所有文件夹创建时间、修改时间
+                        //收集：所有文件创建时间 + 所有文件夹创建时间
                         List<DateTime> list_temp2 = new List<DateTime>();
                         foreach (FileInfo fi_in in di.GetFiles())
-                        {
                             list_temp2.Add(fi_in.CreationTime);
-                            list_temp2.Add(fi_in.LastWriteTime);
-                        }
                         foreach (DirectoryInfo di_in in di.GetDirectories())
-                        {
                             list_temp2.Add(di_in.CreationTime);
-                            list_temp2.Add(di_in.LastWriteTime);
-                        }
+                        //从列表中删除早于'参考基准时间2'的时间
+                        list_temp2 = utils.DeleteTimeEarlyThanReferenceTime(list_temp2, not_early_than_this_time);
+                        //获取列表中最早的时间
                         DateTime dt2 = utils.GetMostEarlyTimeFromList(list_temp2);
                         list_temp2.Clear();
                         list_temp2.Add(di.CreationTime);

@@ -50,7 +50,7 @@ namespace Simple_CLI_Program
         public void demo2()
         {
             //创建时间
-            string str_create = "202/01/01 00:00:00";
+            string str_create = "2020/01/01 00:00:00";
             if (!utils.CheckTimeString(str_create))
             {
                 Console.WriteLine("时间格式错误！");
@@ -352,17 +352,24 @@ namespace Simple_CLI_Program
         //示例9，特殊示例
         public void demo9()
         {
+            Console.WriteLine("目前demo：demo9 Special Need\n");
             SpecialNeed sn = new SpecialNeed();
             //要修改的文件路径
-            string path = "D:\\test_folder";
+            Console.WriteLine("请输入 要修改的文件路径：");
+            string path = Console.ReadLine();
             //时间参考基准
-            string reference_time = "2020/01/01 00:00:00";
+            Console.WriteLine("请输入 参考基准时间：");
+            string reference_time = Console.ReadLine();
+            Console.WriteLine("请输入 筛选创建时间不早于的时间：");
+            string not_early_than_this_time = Console.ReadLine();
 
             //调用函数-方式1
-            sn.ChangeFolderTimeWithSpecialNeed(path, reference_time);
+            sn.ChangeFolderTimeWithSpecialNeed(path, reference_time, not_early_than_this_time);
             //调用函数-方式2
             //DirectoryInfo di = new DirectoryInfo(path);
-            //sn.ChangeFolderTimeWithSpecialNeed(di);
+            //sn.ChangeFolderTimeWithSpecialNeed(di, reference_time, not_early_than_this_time);
+
+            Console.ReadLine();
         }
     }
 }
